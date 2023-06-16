@@ -8,3 +8,4 @@ spring:
 
 jwt:
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+  token-validity-in-seconds: 30 * 60 * 1000L
