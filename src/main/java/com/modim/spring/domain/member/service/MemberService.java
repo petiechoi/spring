@@ -1,12 +1,9 @@
 package com.modim.spring.domain.member.service;
 
-
-import com.modim.spring.domain.member.dto.MemberDto.MemberInfo;
 import com.modim.spring.domain.member.model.Member;
 import com.modim.spring.domain.member.model.Role;
 import com.modim.spring.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import com.modim.spring.domain.member.dto.MemberDto.RequestDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

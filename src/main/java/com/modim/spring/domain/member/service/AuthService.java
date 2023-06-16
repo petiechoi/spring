@@ -22,7 +22,6 @@ public class AuthService {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getLoginId(), loginDto.getLoginPassword());
 
-
         // 아직 인증이 완료되지 않은 객체에 authenticationManagerBuilder를 활용하여 AuthenticationManager의 구현체인
         // ProviderManger의 authenticate 메소드를 실행하여 검증 후 Authenication 객체를 받는다.
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);

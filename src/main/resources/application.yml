@@ -4,8 +4,17 @@ spring:
     username: admin
     password: admin
     url: jdbc:postgresql://localhost:5432/spring
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true  #실행 sql 쿼리 console 출력 여부
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
+
 
 
 jwt:
-  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
-  token-validity-in-seconds: 30 * 60 * 1000L
+  secret: bWUtaHllb25pYy1teS1wbGktbWUtaHllb25pYy1teS1wbGktbWUtaHllb25pYy1teS1wbGktbWUtaHllb25pYy1teS1wbGk=
+  token-validity-in-seconds: 1800 # 30 * 60

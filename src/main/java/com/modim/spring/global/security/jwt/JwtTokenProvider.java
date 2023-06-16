@@ -25,16 +25,19 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider implements InitializingBean {
-    @Value("${jwt.secret}")
-    private String secret;
-
-    @Value("${jwt.token-validity-in-seconds}")
-    private String tokenValidTime;
+    private final String secret;
+    private final Long tokenValidTime;
 
     private Key key;
 
     private static final String AUTHORITIES_KEY = "auth";
 
+    public JwtTokenProvider(
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.token-validity-in-seconds}") long tokenValidTime) {
+        this.secret = secret;
+        this.tokenValidTime = tokenValidTime * 1000L;
+    }
     @Override
     public void afterPropertiesSet() throws Exception {
         byte[] keyBytes = Base64.getDecoder().decode(secret);
