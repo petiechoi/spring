@@ -53,7 +53,7 @@ public class MemberDto {
                     .role(Role.ROLE_USER)
                     .email(email)
                     .name(name)
-                    .register_date(LocalDateTime.now().toString())
+                    .register_date(LocalDateTime.now().toLocalDate().toString())
                     .build();
         }
     }

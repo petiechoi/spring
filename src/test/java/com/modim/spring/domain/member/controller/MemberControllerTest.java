@@ -1,7 +1,8 @@
-package com.modim.spring.domain.member.repository;
+package com.modim.spring.domain.member.controller;
 
 import com.modim.spring.domain.member.dto.MemberDto;
 import com.modim.spring.domain.member.model.Member;
+import com.modim.spring.domain.member.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith({SpringExtension.class})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class MemberRepositoryTest {
+class MemberControllerTest {
     @LocalServerPort
     private int port;
     private MockMvc mockMvc;
@@ -54,10 +55,10 @@ class MemberRepositoryTest {
     @Test
     void member_등록한다() throws Exception{
 
-        String loginId = "test1";
+        String loginId = "test4";
 
         MemberDto.RequestDto requestDto = MemberDto.RequestDto.builder()
-                        .email("test1@modim.co.kr")
+                        .email("test3@modim.co.kr")
                         .loginId(loginId)
                         .loginPassword("Aheldpa!1")
                         .name("모디엠!1")
@@ -72,10 +73,8 @@ class MemberRepositoryTest {
                 .isGreaterThan(0L);
 
         List<Member> members = memberRepository.findAll();
-        assertThat(members.get(3).getLoginId()).isEqualTo(loginId);
+        assertThat(members.get(members.size()-1).getLoginId()).isEqualTo(loginId);
 //        Member member = memberRepository.findById(1L).orElseThrow(() -> new RuntimeException("d"));
 //        Assertions.assertEquals(//compare your object and object in database ok?);
     }
-
-
 }
