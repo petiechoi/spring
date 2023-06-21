@@ -1,23 +1,27 @@
 package com.modim.spring.domain.member.model;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.modim.spring.domain.borrow.model.Borrow;
+import lombok.*;
 import org.hibernate.annotations.Comment;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
-@NoArgsConstructor
 @Getter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
+
+    @OneToMany(mappedBy = "member")
+    private List<Borrow> borrows = new ArrayList<>();
 
     @Column(unique = true)
     @Comment("로그인 아이디")
@@ -38,13 +42,4 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Builder
-    public Member(String loginId, String loginPassword, String name, String email, Role role) {
-        this.loginId = loginId;
-        this.loginPassword = loginPassword;
-        this.name = name;
-        this.email = email;
-        this.register_date = LocalDateTime.now().toString();
-        this.role = role;
-    }
 }

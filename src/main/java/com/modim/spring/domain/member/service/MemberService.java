@@ -22,14 +22,7 @@ public class MemberService {
         if (memberRepository.findByloginId(requestDto.getLoginId()).orElse(null) != null){
             throw new RuntimeException("이미 가입된 유저입니다.");
         }
-
-        Member memberInfo = Member.builder()
-                .loginId(requestDto.getLoginId())
-                .loginPassword(passwordEncoder.encode(requestDto.getLoginPassword()))
-                .email(requestDto.getEmail())
-                .name(requestDto.getName())
-                .role(Role.ROLE_USER)
-                .build();
-        return memberRepository.save(memberInfo).getId();
+        Member member = requestDto.toEntity(passwordEncoder);
+        return memberRepository.save(member).getId();
     }
 }

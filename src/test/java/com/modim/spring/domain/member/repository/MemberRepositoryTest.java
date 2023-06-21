@@ -1,14 +1,18 @@
 package com.modim.spring.domain.member.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.modim.spring.domain.member.dto.MemberDto;
 import com.modim.spring.domain.member.model.Member;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -16,14 +20,22 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
+import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith({SpringExtension.class})
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MemberRepositoryTest {
+    @LocalServerPort
+    private int port;
     private MockMvc mockMvc;
-    @Autowired MemberRepository memberRepository;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
+    @Autowired
+    private MemberRepository memberRepository;
 
     @BeforeEach
     public void setUp(WebApplicationContext webApplicationContext) {
@@ -40,14 +52,29 @@ class MemberRepositoryTest {
     }
 
     @Test
-    void repositoryTestGaboja(){
-        memberRepository.save(
-                //create member
-                Member.builder()
-                        .build()
-        );
-        Member member = memberRepository.findById(1L).orElseThrow(() -> new RuntimeException("fuck you"));
-        //Assertions.assertEquals(//compare your object and object in database ok?);
+    void member_등록한다() throws Exception{
+
+        String loginId = "test1";
+
+        MemberDto.RequestDto requestDto = MemberDto.RequestDto.builder()
+                        .email("test1@modim.co.kr")
+                        .loginId(loginId)
+                        .loginPassword("Aheldpa!1")
+                        .name("모디엠!1")
+                        .build();
+        String url = "http://localhost:" + port + "/api/signup";
+
+        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+
+        assertThat(responseEntity.getStatusCode())
+                .isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody())
+                .isGreaterThan(0L);
+
+        List<Member> members = memberRepository.findAll();
+        assertThat(members.get(3).getLoginId()).isEqualTo(loginId);
+//        Member member = memberRepository.findById(1L).orElseThrow(() -> new RuntimeException("d"));
+//        Assertions.assertEquals(//compare your object and object in database ok?);
     }
 
 
