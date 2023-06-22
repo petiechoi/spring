@@ -8,11 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RequestMapping("/api")
 @RestController
@@ -38,15 +36,14 @@ public class BookController {
         return bookService.bookUpdate(requestDto, id);
     }
 
-
-     //도서 전체 목록 조회
-    @GetMapping("/books")
-    public List<Book> bookList(){
-        return bookService.bookList();
-    }
+     //도서 전체 목록 조회(미사용)
+//    @GetMapping("/bookLis")
+//    public List<Book> bookList(){
+//        return bookService.bookList();
+//    }
 
     // 도서 전체 목록 조회(페이징)
-    @GetMapping("/bookList")
+    @GetMapping("/books")
     public ResponseEntity bookPage(final Pageable pageable){
         Page<Book> books = bookService.bookPage(pageable);
         return new ResponseEntity<>(books, HttpStatus.OK);
