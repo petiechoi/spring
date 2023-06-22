@@ -34,11 +34,11 @@ public class BookControllerTest {
     @BeforeEach
     public void beforeEach(){
         bookRepository.deleteAll();
-        String title = "테스트 케이스";
+        String titleori = "테스트 케이스";
         String author = "홍길동";
         String publisher = "모디엠";
-        for(Integer i = 0; i < 20; i++){
-            title = title + String.valueOf(i);
+        for(int i = 1; i <= 20; i++){
+            String title = titleori + String.valueOf(i);
             Book book = Book.builder()
                     .title(title)
                     .author(author)

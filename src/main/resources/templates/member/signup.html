@@ -1,0 +1,51 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
+<th:block layout:fragment="content">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body justify-content-center">
+            <!-- Nested Row within Card Body -->
+            <div class="col-lg-7 w-100  p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
+                </div>
+                <form class="user">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-user" id="exampleInputId"
+                               placeholder="아이디">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input type="password" class="form-control form-control-user"
+                                   id="exampleInputPassword" placeholder="비밀번호">
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control form-control-user"
+                                   id="exampleRepeatPassword" placeholder="비밀번호 확인">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-user" id="exampleName"
+                               placeholder="이름">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                               placeholder="이메일">
+                    </div>
+
+                    <a href="login.html" class="btn btn-info btn-user btn-block">
+                        회원가입하기
+                    </a>
+                </form>
+                <hr>
+                <div class="text-center">
+                    <a class="small" href="forgot-password.html">비밀번호를 잃어버렸나요?</a>
+                </div>
+                <div class="text-center">
+                    <a class="small" href="login.html">이미 계정이 있습니다. 로그인으로</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

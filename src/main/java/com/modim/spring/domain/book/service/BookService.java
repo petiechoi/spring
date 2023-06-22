@@ -5,6 +5,7 @@ import com.modim.spring.domain.book.model.Book;
 import com.modim.spring.domain.book.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,14 +38,9 @@ public class BookService {
         return book.getId();
     }
 
-    // 1번
-    public List<Book> bookList(){
-        return bookRepository.findAll();
-    }
-
-    // 2번
-    public Page<Book> bookPage(Pageable pageable){
+    public Page<Book> bookList(int page){
         //return bookRepository.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC,"id"))).getContent();
+        Pageable pageable = PageRequest.of(page, 10);
         return bookRepository.findAll(pageable);
 
     }

@@ -37,15 +37,15 @@ public class BookController {
     }
 
      //도서 전체 목록 조회(미사용)
-//    @GetMapping("/bookLis")
+//    @GetMapping("/bookList")
 //    public List<Book> bookList(){
 //        return bookService.bookList();
 //    }
 
     // 도서 전체 목록 조회(페이징)
-    @GetMapping("/books")
-    public ResponseEntity bookPage(final Pageable pageable){
-        Page<Book> books = bookService.bookPage(pageable);
+    @GetMapping("/bookList")
+    public ResponseEntity bookList(final Pageable pageable){
+        Page<Book> books = bookService.bookList(0);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
