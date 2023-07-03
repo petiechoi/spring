@@ -50,11 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // jwtSecurityConfig 클래스 적용
                 .and()
-                .apply(jwtSecurityConfig)
-
-                // 로그아웃 시 페이지이동
-                .and()
-                .logout()
-                .logoutSuccessUrl("/");
+                .apply(jwtSecurityConfig);
     }
 }

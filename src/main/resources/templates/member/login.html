@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default">
 <th:block layout:fragment="content">
@@ -11,11 +11,11 @@
                     </div>
                     <form class="user">
                         <div class="form-group">
-                            <input type="email" class="form-control form-control-user" id="exampleInputId"
+                        <input type="id" class="form-control form-control-user" id="exampleInputId" name="loginId"
                                    aria-describedby="idHelp" placeholder="아이디">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="loginPassword"
                                    placeholder="비밀번호">
                         </div>
                         <div class="form-group">
@@ -25,9 +25,9 @@
                                     Me</label>
                             </div>
                         </div>
-                        <a href="index.html" class="btn btn-info btn-user btn-block">
+                        <button id="login" type="submit" class="btn btn-info btn-user btn-block">
                             로그인
-                        </a>
+                        </button>
                     </form>
                 </div>
             </div>
