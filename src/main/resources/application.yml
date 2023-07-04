@@ -12,8 +12,8 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 
-
-
+cookie:
+  name: modim
 
 jwt:
   secret: bWUtaHllb25pYy1teS1wbGktbWUtaHllb25pYy1teS1wbGktbWUtaHllb25pYy1teS1wbGktbWUtaHllb25pYy1teS1wbGk=

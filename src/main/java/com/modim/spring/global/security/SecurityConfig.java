@@ -33,13 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // Exception을 핸들링 할때 직접만든 클래스
                 .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)      // 유효한 자격증명을 제공하지 않고 접근하려할때 401 에러
+                .accessDeniedHandler(jwtAccessDeniedHandler)        // 필요한 권한이 없이 접근하려 할때 403 에러
 
                 // 세션 미사용
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션을 사용하지 않음
 
                 // HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정
                 .and()
