@@ -59,6 +59,7 @@ public class MemberDto {
     }
 
     @Getter
+    @ToString
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
