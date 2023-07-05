@@ -52,7 +52,7 @@ public class mainController {
     }
 
     @PostMapping("/login")
-    public String authorize(@Valid @RequestBody MemberDto.loginDto loginDto, HttpServletResponse response){
+    public String authorize(@Valid MemberDto.loginDto loginDto, HttpServletResponse response){
         TokenResponseDto tokenResponseDto = authService.login(loginDto);
         response.addCookie(setCookie(tokenResponseDto.getToken()));
         response.setHeader(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + tokenResponseDto.getToken());
@@ -60,8 +60,7 @@ public class mainController {
 //        HttpHeaders httpHeaders = new HttpHeaders(); 와 너무 느린거 아니냐 ;;
 //        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + tokenResponseDto.getToken());
         // return ResponseEntity.ok(tokenResponseDto);
-
-        return "redirect:/member/signup";
+        return "redirect:/signup";
     }
 
     public Cookie setCookie(String coockieValue)
