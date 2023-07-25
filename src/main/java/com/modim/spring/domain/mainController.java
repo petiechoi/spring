@@ -9,11 +9,10 @@ import com.modim.spring.domain.member.service.AuthService;
 import com.modim.spring.domain.member.service.MemberService;
 import com.modim.spring.domain.member.util.CurrentMemberUtil;
 import com.modim.spring.global.security.jwt.JwtFilter;
+import com.modim.spring.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +30,8 @@ public class mainController {
 
     private final MemberService memberService;
     private final AuthService authService;
+    private final JwtTokenProvider jwtTokenProvider;
+
     private final CurrentMemberUtil currentMemberUtil;
 
     @Value("${cookie.name}")
@@ -43,6 +44,11 @@ public class mainController {
     public String bookList(Model model, @RequestParam(value="page", defaultValue = "0")int page){
         Page<Book> bookList = this.bookService.bookList(page);
         model.addAttribute("bookList", bookList);
+
+//        String id= currentMemberUtil.GetCurrentMemberId();
+//        if (id.length() > 0){
+//            model.addAttribute("memberId",id);
+//        }
         return "book/book";
     }
 
@@ -51,48 +57,39 @@ public class mainController {
         return "member/login";
     }
 
-    @PostMapping("/login")
-    public String authorize(@Valid MemberDto.loginDto loginDto, HttpServletResponse response){
-        TokenResponseDto tokenResponseDto = authService.login(loginDto);
-        response.addCookie(setCookie(tokenResponseDto.getToken()));
-        response.setHeader(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + tokenResponseDto.getToken());
-
-//        HttpHeaders httpHeaders = new HttpHeaders(); 와 너무 느린거 아니냐 ;;
-//        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + tokenResponseDto.getToken());
-        // return ResponseEntity.ok(tokenResponseDto);
-        return "redirect:/signup";
-    }
-
-    public Cookie setCookie(String coockieValue)
-    {
-        Cookie cookie = new Cookie(coockieName, coockieValue);
-        cookie.setMaxAge(60 * 60 * 24 * 30);    // 30 days
-        cookie.setSecure(true);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        return cookie;
-    }
-
-    @GetMapping("signup")
-    public String signup(Model model, @AuthenticationPrincipal UserDetails userDetails){
-        System.out.println("userDetails = " + userDetails);
-        if (userDetails != null) {
-            return "signup";
+    @GetMapping("/signup")
+    public String signup(Model model, @CookieValue(name="modim", required = false)String modim){
+        if(modim == null)
+        {
+            return "login";
         }
-        return "/";
+        if( jwtTokenProvider.validateToken(modim) ){
+            currentMemberUtil.getCurrentMember();
+            String id;
+            Object principal = jwtTokenProvider.getAuthentication(modim).getPrincipal();
+            if( principal instanceof UserDetails ){
+                id = ((UserDetails)principal).getUsername();
+            } else {
+                id = principal.toString();
+            }
+            return "redirect:/bookList";
+        }
+        return "redirect:/";
     }
-
-//    @GetMapping("/signup")
-//    public String signup(Model model){
-//        Member member = currentMemberUtil.getCurrentMember();
-//        if( !member.equals(null))
-//            model.addAttribute(member);
-//        return "redirect:/";
-//    }
 
     @PostMapping("/signup")
     public String signup(@Valid MemberDto.RequestDto requestDto){
         memberService.signup(requestDto);
         return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(@CookieValue(name="modim", required = false)String coockieValue, HttpServletResponse response){
+        if(coockieValue.length() > 0){
+            Cookie cookie = new Cookie(coockieName, null);
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+        return "redirect:/bookList";
     }
 }

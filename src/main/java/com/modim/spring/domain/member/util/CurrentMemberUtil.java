@@ -10,17 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class CurrentMemberUtil {
-
     private final MemberRepository memberRepository;
 
     // OUT: Member Loginid
     public static String GetCurrentMemberId(){
-        String id;
+        String id="";
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if( principal instanceof UserDetails ){
             id = ((UserDetails)principal).getUsername();
-        } else {
-            id = principal.toString();
         }
         return id;
     }
