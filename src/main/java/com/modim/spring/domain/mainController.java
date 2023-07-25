@@ -27,11 +27,8 @@ import javax.validation.Valid;
 public class mainController {
 
     private final BookService bookService;
-
     private final MemberService memberService;
-    private final AuthService authService;
     private final JwtTokenProvider jwtTokenProvider;
-
     private final CurrentMemberUtil currentMemberUtil;
 
     @Value("${cookie.name}")
@@ -44,11 +41,6 @@ public class mainController {
     public String bookList(Model model, @RequestParam(value="page", defaultValue = "0")int page){
         Page<Book> bookList = this.bookService.bookList(page);
         model.addAttribute("bookList", bookList);
-
-//        String id= currentMemberUtil.GetCurrentMemberId();
-//        if (id.length() > 0){
-//            model.addAttribute("memberId",id);
-//        }
         return "book/book";
     }
 
@@ -83,7 +75,7 @@ public class mainController {
         return "redirect:/";
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/leave")
     public String logout(@CookieValue(name="modim", required = false)String coockieValue, HttpServletResponse response){
         if(coockieValue.length() > 0){
             Cookie cookie = new Cookie(coockieName, null);

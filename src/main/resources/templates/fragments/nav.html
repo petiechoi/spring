@@ -11,6 +11,6 @@
     <span sec:authentication="name" sec:authorize="isAuthenticated()"></span>
     <span sec:authorize="hasRole('ROLE_USER')" style="margin-right:10px; margin-left:2px">님</span>
     <a class="btn btn-outline-info" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
-    <a class="btn btn-outline-info" sec:authorize="isAuthenticated()" href="/logout">로그아웃</a>
+    <a class="btn btn-outline-info" sec:authorize="isAuthenticated()" href="/leave">로그아웃</a>
 </div>
 </html>
