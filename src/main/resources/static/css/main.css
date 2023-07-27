@@ -6,6 +6,10 @@
     color : #17a2b8;
 }
 
+.table-point{
+    cursor : pointer;
+}
+
 button, input, optgroup, select, textarea {
     margin: 0;
     font-family: inherit;

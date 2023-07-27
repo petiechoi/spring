@@ -25,7 +25,7 @@ public class AuthController {
     @Value("${cookie.name}")
     private String coockieName;
 
-    //사용자가 로그인을 시도하면,,, 실질적인 login 처리는 AuthService에서 이루어진다. 시바 ㄹ누가 클래스 이름 시작문자를 소문자로 하냐 등시나
+    //사용자가 로그인을 시도하면,,, 실질적인 login 처리는 AuthService에서 이루어진다.
     @PostMapping("/login")
     public ResponseEntity<TokenResponseDto> authorize(@Valid @RequestBody loginDto loginDto, HttpServletResponse response) throws IOException{
         TokenResponseDto tokenResponseDto = authService.login(loginDto);

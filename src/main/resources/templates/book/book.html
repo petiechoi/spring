@@ -17,14 +17,19 @@
             <th>도서명</th>
             <th>저자</th>
             <th>출판사</th>
+            <th>대여자</th>
+            <th>상태</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${bookList}">
-            <td th:text="${book.id}"></td>
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.author}"></td>
-            <td th:text="${book.publisher}"></td>
+        <tr th:each="book : ${bookList}" class="table-point">
+            <td id="bookId" th:text="${book.id}"></td>
+            <td id="title" name="title" th:text="${book.title}"></td>
+            <td id="author" th:text="${book.author}"></td>
+            <td id="publisher" th:text="${book.publisher}"></td>
+            <td th:text="${book.borrow}"></td>
+            <td th:if="${book?.borrow}">대여중</td>
+            <td th:unless="${book?.borrow}"></td>
         </tr>
         </tbody>
     </table>
@@ -50,5 +55,8 @@
             </li>
         </ul>
     </nav>
+</th:block>
+<th:block layout:fragment="js">
+    <script src="/js/book/borrow.js"></script>
 </th:block>
 </html>
