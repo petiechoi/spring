@@ -42,4 +42,8 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public void setBorrows(Borrow borrow){
+        this.borrows.add(borrow);
+    }
+
 }

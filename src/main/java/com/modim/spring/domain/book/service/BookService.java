@@ -45,6 +45,10 @@ public class BookService {
 
     }
 
+    public List<Book> bookList(){
+        return bookRepository.findAll();
+    }
+
     public Book bookView(Long id){
         return bookRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("책을 조회할 수 없습니다."));

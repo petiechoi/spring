@@ -15,16 +15,21 @@ $('.table-point').click(function() {
                         dataType: 'json',
                         url : '/api/borrow',
                         success : function(response) {
-                            Toast.fire({
-                            icon:'success',
-                            title:'대여 신청되었습니다.'
-                            });
+//                            Toast.fire({
+//                            icon:'success',
+//                            title:'대여 신청되었습니다.'
+//                            });
 
                             location.href = "/"
                         },
                         error : function(error){
                         // 만약 로그인 안되어있다면,,,?
-                            console.log(error)
+                            console.log(error.body)
+                                // 요청이 실패하거나 오류가 발생했을 때의 처리
+                                console.log('오류 상태 코드:', error.status);
+                                console.log('오류 상태 메시지:', error.statusText);
+                                console.log('오류 응답 JSON 데이터:', error.responseJSON);
+                                console.log('오류 응답 텍스트 내용:', error.responseText);
                         }
                     });
          }

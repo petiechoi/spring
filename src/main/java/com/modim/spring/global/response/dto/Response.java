@@ -3,9 +3,11 @@ package com.modim.spring.global.response.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.server.ResponseStatusException;
 
+@Data
 @NoArgsConstructor
 @JsonInclude(value =  JsonInclude.Include.NON_NULL)
 public class Response<T> {
@@ -32,6 +34,14 @@ public class Response<T> {
     public static Response success(String message){
         return Response.builder()
                 .success(true)
+                .message(message)
+                .data(null)
+                .build();
+    }
+
+    public static Response error(String message){
+        return Response.builder()
+                .success(false)
                 .message(message)
                 .data(null)
                 .build();

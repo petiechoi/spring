@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -41,6 +42,10 @@ public class mainController {
     public String bookList(Model model, @RequestParam(value="page", defaultValue = "0")int page){
         Page<Book> bookList = this.bookService.bookList(page);
         model.addAttribute("bookList", bookList);
+
+//        List<Book> bookList1 = bookService.bookList();
+//        Book temp = bookList1.get(bookList1.size()-1);
+//        Member member = temp.getBorrow().getMember();
         return "book/book";
     }
 

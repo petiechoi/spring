@@ -7,6 +7,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class CurrentMemberUtil {
@@ -23,7 +25,7 @@ public class CurrentMemberUtil {
     }
 
     // OUT: Member
-    public Member getCurrentMember() {
+    public Optional<Member> getCurrentMember() {
         String id = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -32,7 +34,8 @@ public class CurrentMemberUtil {
         } else {
             id = principal.toString();
         }
-        return memberRepository.findByloginId(id)
-                .orElseThrow(()-> new IllegalArgumentException("유저를 찾을 수 없습니다."));
+        return memberRepository.findByloginId(id);
+//        return memberRepository.findByloginId(id)
+//                .orElseThrow(()-> new IllegalArgumentException("유저를 찾을 수 없습니다."));
     }
 }

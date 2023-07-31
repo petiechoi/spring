@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Transactional(readOnly = true)
@@ -26,16 +27,17 @@ public class BorrowService {
 
     // 책 대여
     @Transactional
-    public Long borrowBook(Long id){
-        Member member = currentMemberUtil.getCurrentMember();
+    public void borrowBook(Long id){
+        Member member = currentMemberUtil.getCurrentMember().get();
         Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("책을 찾을 수 없습니다."));
-
         if(book.getBorrow() == null){
-            Borrow borrow = Borrow.builder()
+            Borrow borrow = Borrow
+                    .builder()
                     .book(book)
                     .member(member)
                     .build();
-            return borrowRepository.save(borrow).getId();
+            book.setBorrow(borrow);
+            bookRepository.save(book);
         }
         else throw new RuntimeException("이미 대여중입니다.");
     }

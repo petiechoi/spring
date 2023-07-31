@@ -17,8 +17,8 @@ public class Book {
     @Column(name="book_id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "borrow_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="borrow_id")
     private Borrow borrow;
 
     private String title;
@@ -30,5 +30,10 @@ public class Book {
         this.title = requestDto.getTitle();
         this.author = requestDto.getAuthor();
         this.publisher = requestDto.getPublisher();
+    }
+
+    // 1:1 관계 set
+    public void setBorrow(Borrow borrow){
+        this.borrow = borrow;
     }
 }

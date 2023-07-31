@@ -2,16 +2,18 @@ package com.modim.spring.domain.borrow.model;
 
 import com.modim.spring.domain.book.model.Book;
 import com.modim.spring.domain.member.model.Member;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Borrow {
 
     @Id
@@ -19,19 +21,20 @@ public class Borrow {
     @Column(name="borrow_id")
     private Long id;
 
+    //@ManyToOne(fetch = FetchType.LAZY) // done ?
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToOne(mappedBy = "borrow")
-    private Book book = null;
+    private Book book;
 
     @Column(name="borrow_date")
     private String date;
 
     @Column(name="status")
     @Enumerated(EnumType.STRING) // 이거안해주면 값 이상하게 들어감
-    @Builder.Default
+//    @Builder.Default
     private Status status = Status.POSSIBLE; // 이렇게하면 빌더할때 null넣으면 어플라이로 들어감  ㅅㄱ
 
     @Builder
@@ -48,6 +51,10 @@ public class Borrow {
             this.date = LocalDateTime.now().toString();
         }
         else throw new RuntimeException("알 수 없는 오류로 승인할 수 없습니다.");
+    }
+
+    public void setBook(Book book){
+        this.book = book;
     }
 
 }
