@@ -42,10 +42,6 @@ public class mainController {
     public String bookList(Model model, @RequestParam(value="page", defaultValue = "0")int page){
         Page<Book> bookList = this.bookService.bookList(page);
         model.addAttribute("bookList", bookList);
-
-//        List<Book> bookList1 = bookService.bookList();
-//        Book temp = bookList1.get(bookList1.size()-1);
-//        Member member = temp.getBorrow().getMember();
         return "book/book";
     }
 

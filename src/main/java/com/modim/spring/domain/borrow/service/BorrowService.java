@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Transactional(readOnly = true)
@@ -36,7 +35,9 @@ public class BorrowService {
                     .book(book)
                     .member(member)
                     .build();
+            // 양방향 연결
             book.setBorrow(borrow);
+            member.getBorrows().add(borrow);
             bookRepository.save(book);
         }
         else throw new RuntimeException("이미 대여중입니다.");

@@ -21,7 +21,6 @@ public class Borrow {
     @Column(name="borrow_id")
     private Long id;
 
-    //@ManyToOne(fetch = FetchType.LAZY) // done ?
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -35,7 +34,7 @@ public class Borrow {
     @Column(name="status")
     @Enumerated(EnumType.STRING) // 이거안해주면 값 이상하게 들어감
 //    @Builder.Default
-    private Status status = Status.POSSIBLE; // 이렇게하면 빌더할때 null넣으면 어플라이로 들어감  ㅅㄱ
+    private Status status;
 
     @Builder
     public Borrow(Member member, Book book) {

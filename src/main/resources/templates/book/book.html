@@ -27,9 +27,12 @@
             <td id="title" name="title" th:text="${book.title}"></td>
             <td id="author" th:text="${book.author}"></td>
             <td id="publisher" th:text="${book.publisher}"></td>
-            <td th:text="${book.borrow}"></td>
-            <td th:if="${book?.borrow}">대여중</td>
-            <td th:unless="${book?.borrow}"></td>
+            <td th:text="${book.borrow?.member}? ${book.borrow.member.name} : ''"></td>
+            <td th:if="${#strings.equals(book.borrow?.status,'APPLY')}" >
+                <span class="minty-badge minty-bg-warning">신청중</span></td>
+            <td th:if="${#strings.equals(book.borrow?.status,'PROGRESS')}" >
+                <span class="minty-badge minty-bg-danger">대여중</span></td>
+            <td th:if="${#strings.isEmpty(book.borrow?.status)}"></td>
         </tr>
         </tbody>
     </table>
