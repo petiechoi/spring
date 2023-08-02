@@ -4,7 +4,10 @@ package com.modim.spring.domain.member.model;
 import com.modim.spring.domain.borrow.model.Borrow;
 import lombok.*;
 import org.hibernate.annotations.Comment;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +40,8 @@ public class Member {
     private String email;
 
     @Comment("가입날짜")
-    private String register_date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime register_date;
 
     @Enumerated(EnumType.STRING)
     private Role role;

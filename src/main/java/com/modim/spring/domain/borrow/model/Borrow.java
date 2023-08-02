@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,8 +29,8 @@ public class Borrow {
     @OneToOne(mappedBy = "borrow")
     private Book book;
 
-    @Column(name="borrow_date")
-    private String date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime borrowedAt;
 
     @Column(name="status")
     @Enumerated(EnumType.STRING) // 이거안해주면 값 이상하게 들어감
@@ -40,14 +41,14 @@ public class Borrow {
     public Borrow(Member member, Book book) {
         this.member = member;
         this.book = book;
-        this.date = LocalDateTime.now().toString();
+        this.borrowedAt = LocalDateTime.now();
         this.status = Status.APPLY;
     }
 
     public void Apply() {
         if (this.status.equals(Status.APPLY)) {
             this.status = Status.PROGRESS;
-            this.date = LocalDateTime.now().toString();
+            this.borrowedAt = LocalDateTime.now();
         }
         else throw new RuntimeException("알 수 없는 오류로 승인할 수 없습니다.");
     }

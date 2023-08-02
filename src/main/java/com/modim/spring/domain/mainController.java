@@ -2,6 +2,8 @@ package com.modim.spring.domain;
 
 import com.modim.spring.domain.book.model.Book;
 import com.modim.spring.domain.book.service.BookService;
+import com.modim.spring.domain.borrow.model.Borrow;
+import com.modim.spring.domain.borrow.service.BorrowService;
 import com.modim.spring.domain.member.dto.MemberDto;
 import com.modim.spring.domain.member.model.Member;
 import com.modim.spring.domain.member.model.TokenResponseDto;
@@ -29,6 +31,7 @@ public class mainController {
 
     private final BookService bookService;
     private final MemberService memberService;
+    private final BorrowService borrowService;
     private final JwtTokenProvider jwtTokenProvider;
     private final CurrentMemberUtil currentMemberUtil;
 
@@ -85,4 +88,12 @@ public class mainController {
         }
         return "redirect:/bookList";
     }
+
+    @GetMapping("/bookmng")
+    public String bookmng(Model model){
+        List<Borrow> borrowList = borrowService.borrowList();
+        model.addAttribute("borrowList",borrowList);
+        return "admin/bookmng";
+    }
+
 }

@@ -16,17 +16,6 @@ public class MemberDto {
         throw new IllegalArgumentException();
     }
 
-//    @Builder
-//    @Getter
-//    @AllArgsConstructor
-//    public static class MemberInfo {
-//        private String loginId;
-//        private String loginPassword;
-//        private String name;
-//        private String email;
-//        private Role role;
-//    }
-
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -53,7 +42,7 @@ public class MemberDto {
                     .role(Role.ROLE_USER)
                     .email(email)
                     .name(name)
-                    .register_date(LocalDateTime.now().toLocalDate().toString())
+                    .register_date(LocalDateTime.now())
                     .build();
         }
     }
