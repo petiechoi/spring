@@ -138,15 +138,17 @@ h2, .text-dark{
 }
 
 /// https://bootswatch.com/minty/
-.minty-bg-warning {
-    --bs-bg-opacity: 1;
-    background-color: rgb(255, 206, 103);
-}
 
 .minty-bg-danger{
     --bs-bg-opacity: 1;
     background-color: rgb(255, 120, 81);
 }
+
+.minty-bg-apply{
+    --bs-bg-opacity: 1;
+    background-color: rgb(255, 206, 103);
+}
+
 
 .minty-badge {
     --bs-border-radius: 0.4rem;
@@ -214,4 +216,22 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 
 .shadow-table {
     box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+}
+
+.inner-2nd-row{
+    padding-right: 0.75rem !important;
+    padding-left: 0.75rem !important;
+}
+
+.inner-row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+}
+
+.form-control-user {
+    font-size: .8rem;
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
 }

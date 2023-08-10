@@ -4,15 +4,15 @@ package com.modim.spring.global.response.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.server.ResponseStatusException;
 
 @Data
 @NoArgsConstructor
+@Getter
 @JsonInclude(value =  JsonInclude.Include.NON_NULL)
 public class Response<T> {
     private boolean success;
-    //private int code;
     private String message;
     private T data;
 
@@ -44,6 +44,22 @@ public class Response<T> {
                 .success(false)
                 .message(message)
                 .data(null)
+                .build();
+    }
+
+    public static <T> Response error(T data){
+        return Response.builder()
+                .success(false)
+                .message("실패")
+                .data(data)
+                .build();
+    }
+
+    public static <T> Response success(T data){
+        return Response.builder()
+                .success(true)
+                .message("성공")
+                .data(data)
                 .build();
     }
 }

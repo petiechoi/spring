@@ -38,7 +38,7 @@
                         <td th:text="${borrow.member.name}"></td>
                         <td th:text="${borrow.date}"></td>
                         <td th:if="${#strings.equals(borrow.status,'APPLY')}" >
-                            <span class="minty-badge minty-bg-warning">신청중</span></td>
+                            <span class="minty-badge minty-bg-apply">신청중</span></td>
                         <td th:if="${#strings.equals(borrow.status,'PROGRESS')}" >
                             <span class="minty-badge minty-bg-danger">대여중</span></td>
                     </tr>

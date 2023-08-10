@@ -56,25 +56,12 @@ public class mainController {
     @GetMapping("/signup")
     public String signup(Model model, @CookieValue(name="modim", required = false)String modim){
         if(modim == null)
-        {
-            return "login";
-        }
-        if( jwtTokenProvider.validateToken(modim) ){
-            currentMemberUtil.getCurrentMember();
-            String id;
-            Object principal = jwtTokenProvider.getAuthentication(modim).getPrincipal();
-            if( principal instanceof UserDetails ){
-                id = ((UserDetails)principal).getUsername();
-            } else {
-                id = principal.toString();
-            }
-            return "redirect:/bookList";
-        }
-        return "redirect:/";
+            return "member/signup";
+        return "redirect:/bookList";
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid MemberDto.RequestDto requestDto){
+    public String signup(@Valid @RequestBody MemberDto.RequestDto requestDto){
         memberService.signup(requestDto);
         return "redirect:/";
     }
