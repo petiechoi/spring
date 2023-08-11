@@ -235,3 +235,47 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     border-radius: 10rem;
     padding: 1.5rem 1rem;
 }
+
+// nav
+.header{
+    position: sticky;
+    top: 0;
+    z-index: 1071;
+}
+
+// bookCreate
+.section-nav{
+    margin-bottom: 10px;
+    border-right: 1px solid #eee;
+    padding-left: unset;
+}
+ul{
+    margin-bottom: 10px;
+    border-right: 1px solid #eee;
+    padding-left: unset;
+}
+
+a{
+    text-decoration: none;
+}
+
+.toc-entry{ display: block;}
+.toc-entry a {
+    display: block;
+    padding: 0.125rem 1.5rem;
+    color: #99979c;
+}
+.toc-entry a:hover {
+    color: rgba(0,0,0,.85);
+    text-decoration: none;
+}
+.toc-header{
+    display:flex;
+}
+
+.form-op{
+    padding: 1rem;
+    margin: 1rem -15px 0;
+    border: solid #f7f7f9;
+    border-width: 0.2rem 0 0;
+}

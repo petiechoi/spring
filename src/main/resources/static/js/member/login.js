@@ -20,4 +20,13 @@ $(document).ready(function(){
             }
         });
     });
+
+    // 비밀번호 찾기 임시조치
+    $(document).on('click', '#forget-pw', function(e) {
+      swal(
+        'Error!',
+        '잘못된 접근입니다.',
+        'error'
+      )
+    });
 });

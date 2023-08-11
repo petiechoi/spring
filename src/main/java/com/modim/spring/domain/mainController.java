@@ -83,4 +83,9 @@ public class mainController {
         return "admin/bookmng";
     }
 
+    @GetMapping("/book/create")
+    public String bookCreate(Model model){
+        return "admin/bookCreate";
+    }
+
 }

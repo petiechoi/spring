@@ -39,7 +39,9 @@ public class BookService {
     }
 
     public Page<Book> bookList(int page){
-        //return bookRepository.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC,"id"))).getContent();
+        long pageend = bookRepository.countBy()/10;
+        if (page < 0 ) page = 0;
+        if (page > pageend ) page = (int) pageend;
         Pageable pageable = PageRequest.of(page, 10);
         return bookRepository.findAll(pageable);
 
