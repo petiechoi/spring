@@ -4,15 +4,23 @@
 	});
 
 	$('#book-create').click(function() {
-	    let result = '책제목:'+$('#title').val() + '\n' +
-	     '저자:' + $('#author').val()+ '\n' + '출판사:' + $('#publisher').val() + '\n등록하시겠습니까?';
+	    var Title = $('#title').val();
+	    var Author = $('#author').val();
+	    var Publisher = $('#publisher').val();
+
+	    let result = '책제목:'+ Title + '\n' +
+	     '저자:' + Author + '\n' + '출판사:' + Publisher + '\n등록하시겠습니까?';
 	     var postData = {
-            title: $('#title').val(),
-            author:$('#author').val(),
-            publisher:$('#publisher').val()
+            title: Title,
+            author:Author,
+            publisher:Publisher
 	     };
 	     if(confirm(result)){
-	        console.log("진입");
+	        if(Title.length == 0 || Author.length == 0 || Publisher.length == 0){
+	            alert("내용이 비어있습니다. 다시 작성해주십시오.");
+	            return;
+	        }
+
 	        $.ajax({
 	            type: 'POST',
 	            contentType : 'application/json; charset=utf-8;',

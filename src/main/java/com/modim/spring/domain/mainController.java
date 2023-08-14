@@ -88,4 +88,10 @@ public class mainController {
         return "admin/bookCreate";
     }
 
+    @GetMapping("/book/update")
+    public String bookUpdate(Model model){
+        List<Book> bookList = bookService.bookList();
+        model.addAttribute("bookList",bookList);
+        return "admin/bookUpdate";
+    }
 }

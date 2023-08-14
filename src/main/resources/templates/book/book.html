@@ -46,7 +46,6 @@
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
-<!--            th:if="${pageNum >= bookList.number-5 and pageNum <= bookList.number+5}"-->
             <li th:each="pageNum : ${#numbers.sequence(start,end)}"
                 th:classappend=" ( (${pageNum} == ${bookList.number+1}) or (${start} == ${end}) ) ? 'active'"
                 class="page-item">

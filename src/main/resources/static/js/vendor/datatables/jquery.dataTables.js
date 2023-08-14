@@ -2013,8 +2013,17 @@
 			"mData": oDefaults.mData ? oDefaults.mData : iCol,
 			idx: iCol
 		} );
+
+		// Thead 제외
+	    if( oCol.sTitle == "수정" || oCol.sTitle == "삭제")
+	    {
+	        oCol.bSearchable = false;
+	        oCol.bSortable = false;
+	    }
+
 		oSettings.aoColumns.push( oCol );
-	
+
+
 		// Add search object for column specific search. Note that the `searchCols[ iCol ]`
 		// passed into extend can be undefined. This allows the user to give a default
 		// with only some of the parameters defined, and also not give a default
