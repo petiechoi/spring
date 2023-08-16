@@ -3,6 +3,7 @@ package com.modim.spring.domain.book.controller;
 import com.modim.spring.domain.book.dto.BookDto.RequestDto;
 import com.modim.spring.domain.book.model.Book;
 import com.modim.spring.domain.book.service.BookService;
+import com.modim.spring.global.response.dto.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,16 +32,12 @@ public class BookController {
     }
 
     // 도서 수정
-    @PutMapping("/book")
-    public Long bookUpdate(@Valid @RequestBody RequestDto requestDto, @PathVariable("id") Long id) {
-        return bookService.bookUpdate(requestDto, id);
+    @PutMapping("/book/{id}")
+    public ResponseEntity bookUpdate(@Valid @RequestBody RequestDto requestDto, @PathVariable(value="id") Long id) {
+        if (id == bookService.bookUpdate(requestDto, id))
+            return new ResponseEntity<>(Response.success(), HttpStatus.OK);
+        return new ResponseEntity<>(Response.error("대상을 찾을 수 없습니다."),HttpStatus.OK);
     }
-
-     //도서 전체 목록 조회(미사용)
-//    @GetMapping("/bookList")
-//    public List<Book> bookList(){
-//        return bookService.bookList();
-//    }
 
     // 도서 전체 목록 조회(페이징)
     @GetMapping("/bookList")

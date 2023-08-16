@@ -8,19 +8,25 @@
   <main class="card col-12 col-md-9 col-xl-8 py-md-3 bd-content">
     <h4 style="-webkit-text-stroke: thin;">도서 등록</h4>
     <div class="form-op">
+      <input id="bid" type="hidden" th:value="${book?.id}">
       <div class="form-group">
         <label class="d-block">도서명</label>
-        <input class="form-control" type="text" id="title">
+          <input class="form-control" type="text" id="title" th:value="${book?.title}?:''">
       </div>
       <div class="form-group">
         <label class="d-block">저자</label>
-        <input class="form-control" type="text" id="author">
+<!--        <input class="form-control" type="text" id="author">-->
+        <input class="form-control" type="text" id="author" th:value="${book?.author}?:''">
       </div>
       <div class="form-group">
         <label class="d-block">출판사</label>
-        <input class="form-control" type="text" id="publisher">
+<!--        <input class="form-control" type="text" id="publisher">-->
+        <input class="form-control" type="text" id="publisher" th:value="${book?.publisher}?:''">
       </div>
-      <button type="submit" id="book-create" class="btn btn-primary">Submit</button>
+      <th:block>
+        <button th:if="${book}" type="submit" id="book-update" class="btn btn-primary">Submit</button>
+        <button th:unless="${book}" type="submit" id="book-create" class="btn btn-primary">Submit</button>
+      </th:block>
     </div>
   </main>
 </section>

@@ -85,7 +85,14 @@ public class mainController {
 
     @GetMapping("/book/create")
     public String bookCreate(Model model){
-        return "admin/bookCreate";
+        return "admin/bookCreate";      // 최초
+    }
+
+    @GetMapping("/book/update/{id}")
+    public String bookUpdate(Model model, @PathVariable(value="id") Long id){
+        Book book = bookService.bookView(id);
+        model.addAttribute("book",book);
+        return "admin/bookCreate";      // 수정
     }
 
     @GetMapping("/book/update")
