@@ -26,9 +26,10 @@ public class BookController {
     }
 
     // 도서 삭제
-    @DeleteMapping("/book")
-    public void bookDelete(@PathVariable("id") Long id){
+    @DeleteMapping("/book/{id}")
+    public ResponseEntity bookDelete(@PathVariable("id") Long id){
         bookService.bookDelete(id);
+        return new ResponseEntity<>(Response.success(),HttpStatus.OK);
     }
 
     // 도서 수정

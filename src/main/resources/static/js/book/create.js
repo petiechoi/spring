@@ -66,7 +66,7 @@
     	            url : '/api/book/'+ $('#bid').val(),
     	            success: function(response){
     	                if(response.success)
-    	                    location.replace(location.href);
+    	                    history.back();
     	                else
     	                    alert(response.message);
     	            },
