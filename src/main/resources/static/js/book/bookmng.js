@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('#dataTable').DataTable();
+  $("#nav-l").load("/js/book/sidemenu.html");
 
   $('.table-point').click(function() {
           var td = $(this).children();

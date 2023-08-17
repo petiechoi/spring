@@ -260,7 +260,6 @@ a{
 .toc-entry{ display: block;}
 .toc-entry a {
     display: block;
-    padding: 0.125rem 1.5rem;
     color: #99979c;
 }
 .toc-entry a:hover {
@@ -268,6 +267,7 @@ a{
     text-decoration: none;
 }
 .toc-header{
+    margin-top:15px;
     display:flex;
 }
 

@@ -3,47 +3,52 @@
       layout:decorate="layout/default">
 
 <th:block layout:fragment="content">
-    <div class="card shadow-table mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>도서명</th>
-                        <th>저자</th>
-                        <th>출판사</th>
-                        <th>대여자</th>
-                        <th>대여일</th>
-                        <th>상태</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>도서명</th>
-                        <th>저자</th>
-                        <th>출판사</th>
-                        <th>대여자</th>
-                        <th>대여일</th>
-                        <th>상태</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    <tr th:each="borrow : ${borrowList}" class="table-point">
-                        <input type="hidden" th:value="${borrow.id}">
-                        <td th:text="${borrow.book.title}"></td>
-                        <td th:text="${borrow.book.author}"></td>
-                        <td th:text="${borrow.book.publisher}"></td>
-                        <td th:text="${borrow.member.name}"></td>
-                        <td th:text="${#temporals.format(borrow.borrowedAt, 'yyyy-MM-dd')}"></td>
-                        <td th:if="${#strings.equals(borrow.status,'APPLY')}" id="B_APPLY">
-                            <span class="minty-badge minty-bg-apply">신청중</span></td>
-                        <td th:if="${#strings.equals(borrow.status,'PROGRESS')}" id="B_PROGRESS">
-                            <span class="minty-badge minty-bg-danger">대여중</span></td>
-                    </tr>
-                    </tbody>
-                </table>
+    <div class="container-fluid pt-3 pb-3">
+        <section class="row flex-xl-nowrap">
+            <div id="nav-l" class="d-none d-xl-block col-xl-2 bd-toc"></div>
+            <div class="card shadow-table mb-4 container-fluid">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>도서명</th>
+                                <th>저자</th>
+                                <th>출판사</th>
+                                <th>대여자</th>
+                                <th>대여일</th>
+                                <th>상태</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>도서명</th>
+                                <th>저자</th>
+                                <th>출판사</th>
+                                <th>대여자</th>
+                                <th>대여일</th>
+                                <th>상태</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr th:each="borrow : ${borrowList}" class="table-point">
+                                <input type="hidden" th:value="${borrow.id}">
+                                <td th:text="${borrow.book.title}"></td>
+                                <td th:text="${borrow.book.author}"></td>
+                                <td th:text="${borrow.book.publisher}"></td>
+                                <td th:text="${borrow.member.name}"></td>
+                                <td th:text="${#temporals.format(borrow.borrowedAt, 'yyyy-MM-dd')}"></td>
+                                <td th:if="${#strings.equals(borrow.status,'APPLY')}" id="B_APPLY">
+                                    <span class="minty-badge minty-bg-apply">신청중</span></td>
+                                <td th:if="${#strings.equals(borrow.status,'PROGRESS')}" id="B_PROGRESS">
+                                    <span class="minty-badge minty-bg-danger">대여중</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
 </th:block>
 <th:block layout:fragment="js">
@@ -52,6 +57,7 @@
     <script src="/js/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/js/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.4.2/js/all.js"></script>
     <script src="/js/book/bookmng.js"></script>
 </th:block>
 </html>
