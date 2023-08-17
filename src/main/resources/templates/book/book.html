@@ -16,20 +16,21 @@
             <th>도서명</th>
             <th>저자</th>
             <th>출판사</th>
-            <th>대여자</th>
-            <th>상태</th>
+            <th class="w-10p">대여자</th>
+            <th class="w-10p">상태</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="book : ${bookList}" class="table-point">
+            <input type="hidden" th:value="${book.id}">
             <td id="title" name="title" th:text="${book.title}"></td>
             <td id="author" th:text="${book.author}"></td>
             <td id="publisher" th:text="${book.publisher}"></td>
             <td th:text="${book.borrow?.member}? ${book.borrow.member.name} : ''"></td>
             <td th:if="${#strings.equals(book.borrow?.status,'APPLY')}" >
-                <span class="minty-badge minty-bg-warning">신청중</span></td>
+                <span class="minty-badge minty-bg-apply" id="B_APPLY">신청중</span></td>
             <td th:if="${#strings.equals(book.borrow?.status,'PROGRESS')}" >
-                <span class="minty-badge minty-bg-danger">대여중</span></td>
+                <span class="minty-badge minty-bg-danger" id="B_PROGRESS">대여중</span></td>
             <td th:if="${#strings.isEmpty(book.borrow?.status)}"></td>
         </tr>
         </tbody>

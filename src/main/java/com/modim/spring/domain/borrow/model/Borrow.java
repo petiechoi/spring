@@ -48,7 +48,7 @@ public class Borrow {
     public void Apply() {
         if (this.status.equals(Status.APPLY)) {
             this.status = Status.PROGRESS;
-            this.borrowedAt = LocalDateTime.now();
+//            this.borrowedAt = LocalDateTime.now();
         }
         else throw new RuntimeException("알 수 없는 오류로 승인할 수 없습니다.");
     }

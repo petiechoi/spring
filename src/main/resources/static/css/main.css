@@ -137,8 +137,6 @@ h2, .text-dark{
     display: flex;
 }
 
-/// https://bootswatch.com/minty/
-
 .minty-bg-danger{
     --bs-bg-opacity: 1;
     background-color: rgb(255, 120, 81);

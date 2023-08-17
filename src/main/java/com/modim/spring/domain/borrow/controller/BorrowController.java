@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 
 @RequestMapping("/api")
 @RestController
@@ -28,24 +27,26 @@ public class BorrowController {
     {
         Optional<Member> member = currentMemberUtil.getCurrentMember();
         if(member.isEmpty())
-            return new ResponseEntity<>(Response.error("유저를 찾을 수 없습니다."), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(Response.error("유저를 찾을 수 없습니다."), HttpStatus.OK);
 
         borrowService.borrowBook(Long.parseLong(map.get("id")));
         return new ResponseEntity<>(Response.success(), HttpStatus.OK);
     }
 
     // 도서 대여 승인
-    @PostMapping("/borrow/apply")
-    public Long borrowApply(@PathVariable("id")Long id)
+    @PostMapping("/borrow/apply/{id}")
+    public ResponseEntity borrowApply(@PathVariable(value="id")Long id)
     {
-        return borrowService.borrowApply(id);
+        borrowService.borrowApply(id);
+        return new ResponseEntity<>(Response.success(),HttpStatus.OK);
     }
 
     // 도서 승인 삭제
-    @DeleteMapping("/borrow")
-    public void borrowDelete(@PathVariable("id")Long id)
+    @DeleteMapping("/borrow/{id}")
+    public ResponseEntity borrowDelete(@PathVariable(value="id")Long id)
     {
         borrowService.borrowDelete(id);
+        return new ResponseEntity<>(Response.success(),HttpStatus.OK);
     }
 
     // 도서 대여 목록

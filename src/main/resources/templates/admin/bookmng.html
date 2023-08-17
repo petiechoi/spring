@@ -4,9 +4,6 @@
 
 <th:block layout:fragment="content">
     <div class="card shadow-table mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -31,15 +28,16 @@
                     </tr>
                     </tfoot>
                     <tbody>
-                    <tr th:each="borrow : ${borrowList}">
+                    <tr th:each="borrow : ${borrowList}" class="table-point">
+                        <input type="hidden" th:value="${borrow.id}">
                         <td th:text="${borrow.book.title}"></td>
                         <td th:text="${borrow.book.author}"></td>
                         <td th:text="${borrow.book.publisher}"></td>
                         <td th:text="${borrow.member.name}"></td>
-                        <td th:text="${borrow.date}"></td>
-                        <td th:if="${#strings.equals(borrow.status,'APPLY')}" >
+                        <td th:text="${#temporals.format(borrow.borrowedAt, 'yyyy-MM-dd')}"></td>
+                        <td th:if="${#strings.equals(borrow.status,'APPLY')}" id="B_APPLY">
                             <span class="minty-badge minty-bg-apply">신청중</span></td>
-                        <td th:if="${#strings.equals(borrow.status,'PROGRESS')}" >
+                        <td th:if="${#strings.equals(borrow.status,'PROGRESS')}" id="B_PROGRESS">
                             <span class="minty-badge minty-bg-danger">대여중</span></td>
                     </tr>
                     </tbody>
@@ -54,7 +52,6 @@
     <script src="/js/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/js/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/js/book/borrow.js"></script>
     <script src="/js/book/bookmng.js"></script>
 </th:block>
 </html>

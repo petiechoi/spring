@@ -52,6 +52,9 @@ public class BorrowService {
 
     @Transactional
     public void borrowDelete(Long id){
+        Borrow borrow = borrowRepository.findById(id).orElseThrow();
+        borrow.getMember().delBorrow(borrow);
+        borrow.getBook().setBorrow(null);
         borrowRepository.deleteById(id);
     }
 

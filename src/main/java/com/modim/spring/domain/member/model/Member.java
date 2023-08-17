@@ -50,4 +50,8 @@ public class Member {
         this.borrows.add(borrow);
     }
 
+    public void delBorrow(Borrow borrow){
+        this.borrows.remove(borrow);
+    }
+
 }
