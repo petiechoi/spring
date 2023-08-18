@@ -63,9 +63,9 @@ public class MemberController {
         return cookie;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/join")
     public ResponseEntity<Response> join(@Valid @RequestBody RequestDto requestDto) {
-        return ResponseEntity.ok(memberService.signup(requestDto));
+        return ResponseEntity.ok(memberService.join(requestDto));
     }
 }
 

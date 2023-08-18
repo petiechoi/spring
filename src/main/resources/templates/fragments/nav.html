@@ -3,10 +3,10 @@
      class="header d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-m">
     <h5 class="my-0 mr-md-auto font-weight-normal">Modim</h5>
     <nav class="my-2 my-md-0 mr-md-4">
-        <a class="p-2 text-dark" href="/bookList">도서 목록</a>
+        <a class="p-2 text-dark" href="/book/List">도서 목록</a>
         <a class="p-2 text-dark" href="#">사내 문서</a>
         <a class="p-2 text-dark" href="#">게시판</a>
-        <a class="p-2 text-dark" href="/bookmng">관리자</a>
+        <a class="p-2 text-dark" href="/manage/book/List">관리자</a>
     </nav>
     <span sec:authorize="isAuthenticated()" style="margin-right:7px">반갑습니다. <span sec:authentication="name"></span>님!</span>
     <a class="btn btn-outline-info" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>

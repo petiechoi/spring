@@ -1,0 +1,50 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragments/default">
+<th:block layout:fragment="content">
+  <div class="container-fluid pt-3 pb-3">
+    <section class="row flex-xl-nowrap">
+      <div id="nav-l" class="d-none d-xl-block col-xl-2 bd-toc"></div>
+      <div class="card shadow-table mb-4 container-fluid">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+              <tr>
+                <th>도서명</th>
+                <th>저자</th>
+                <th>출판사</th>
+                <th class="w-10p">수정</th>
+                <th class="w-10p">삭제</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="book : ${bookList}">
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.publisher}"></td>
+                <td class="text-center"><a type="button" th:href='@{/manage/book/update/{id}(id=${book.id})}'>수정</a></td>
+                <td class="text-center"><button type="button" th:onclick='deleteBook([[${book.id}]])'>삭제</button></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</th:block>
+<th:block layout:fragment="js">
+  <link href="/js/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <script src="/js/vendor/jquery/jquery.min.js"></script>
+  <script src="/js/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!--  <script src="/js/vendor/datatables/jquery.dataTables.min.js"></script>-->
+  <script src="/js/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/js/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v6.4.2/js/all.js"></script>
+  <script src="/js/common/bookList_mng.js"></script>
+</th:block>
+</html>
+
+
+

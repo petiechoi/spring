@@ -15,17 +15,16 @@ import static com.modim.spring.domain.member.model.MemberCode.*;
 @RequiredArgsConstructor
 @Service
 public class MemberService {
-
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Response signup(RequestDto requestDto){
+    public Response join(RequestDto requestDto){
         if (memberRepository.findByloginId(requestDto.getLoginId()).orElse(null) != null){
             return Response.error(ID_DUPLICATE.getMsg());
         }
         Member member = requestDto.toEntity(passwordEncoder);
-        //memberRepository.save(member);
+        memberRepository.save(member);
         return Response.success();
     }
 }
