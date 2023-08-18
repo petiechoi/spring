@@ -1,0 +1,41 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default">
+<th:block layout:fragment="content">
+<div class="container-fluid pt-3 pb-3">
+<section class="row flex-xl-nowrap">
+  <div id="nav-l" class="d-none d-xl-block col-xl-2 bd-toc"></div>
+  <main class="card col-12 col-md-9 col-xl-8 py-md-3 bd-content">
+    <h4 th:text="${book}? '도서 수정':'도서 등록'" style="-webkit-text-stroke: thin;"></h4>
+    <div class="form-op">
+      <input id="bid" type="hidden" th:value="${book?.id}">
+      <div class="form-group">
+        <label class="d-block">도서명</label>
+          <input class="form-control" type="text" id="title" th:value="${book?.title}?:''">
+      </div>
+      <div class="form-group">
+        <label class="d-block">저자</label>
+        <input class="form-control" type="text" id="author" th:value="${book?.author}?:''">
+      </div>
+      <div class="form-group">
+        <label class="d-block">출판사</label>
+        <input class="form-control" type="text" id="publisher" th:value="${book?.publisher}?:''">
+      </div>
+      <th:block>
+        <button th:if="${book}" type="submit" id="book-update" class="btn btn-primary">Submit</button>
+        <button th:unless="${book}" type="submit" id="book-create" class="btn btn-primary">Submit</button>
+      </th:block>
+    </div>
+  </main>
+</section>
+</div>
+</th:block>
+<th:block layout:fragment="js">
+  <script src="/js/vendor/jquery/jquery.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v6.4.2/js/all.js"></script>
+  <script src="/js/book/create.js"></script>
+</th:block>
+</html>
+
+
+
