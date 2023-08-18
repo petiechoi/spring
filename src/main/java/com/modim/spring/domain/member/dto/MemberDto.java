@@ -1,5 +1,6 @@
 package com.modim.spring.domain.member.dto;
 
+import com.modim.spring.domain.member.model.Gender;
 import com.modim.spring.domain.member.model.Member;
 import com.modim.spring.domain.member.model.Role;
 import lombok.*;
@@ -7,6 +8,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -35,6 +37,9 @@ public class MemberDto {
         @NotEmpty(message = "이메일은 필수 입력 값입니다.")
         private String email;
 
+        @NotNull(message = "성별은 필수 선택 값입니다.")
+        private Gender gender;
+
         public Member toEntity(PasswordEncoder passwordEncoder) {
             return Member.builder()
                     .loginId(loginId)
@@ -43,6 +48,8 @@ public class MemberDto {
                     .email(email)
                     .name(name)
                     .register_date(LocalDateTime.now())
+                    .gender(gender)
+                    .deleteYN(false)
                     .build();
         }
     }

@@ -46,6 +46,13 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Comment("성별")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Comment("탈퇴여부")
+    private boolean deleteYN = false;
+
     public void setBorrows(Borrow borrow){
         this.borrows.add(borrow);
     }

@@ -78,8 +78,11 @@ $(document).ready(function(){
             loginId: $('#InputId').val(),
             loginPassword: $('#InputPassword').val(),
             name: $('#Name').val(),
-            email: $('#InputEmail').val()
+            email: $('#InputEmail').val(),
+            gender: $("input[name='gender']:checked").val()
         }
+        console.log(postData);
+        debugger;
         $.ajax({
             type: 'POST',
             contentType : 'application/json; charset=utf-8;',
@@ -101,7 +104,7 @@ $(document).ready(function(){
                         })
                         Toast.fire({
                           icon: 'success',
-                          title: '환영합니다! 회원가입을 완료하였습니다.'
+                          title: '환영합니다!\n 회원가입을 완료하였습니다.'
                         });
                         location.href = "/";
                 }

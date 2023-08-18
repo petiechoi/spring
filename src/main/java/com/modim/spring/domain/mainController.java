@@ -36,9 +36,9 @@ public class mainController {
     private String coockieName;
 
     @GetMapping("/")
-    public String root() {return "redirect:/book/List";}        // 이거 맞나?
+    public String root() {return "redirect:/book/list";}
 
-    @GetMapping("/book/List")
+    @GetMapping("/book/list")
     public String bookList(Model model, @RequestParam(value="page", defaultValue = "0")int page){
         Page<Book> bookList = this.bookService.bookList(page);
         model.addAttribute("bookList", bookList);

@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static com.modim.spring.domain.member.model.MemberCode.*;
 
 @Transactional(readOnly = true)
@@ -26,5 +28,9 @@ public class MemberService {
         Member member = requestDto.toEntity(passwordEncoder);
         memberRepository.save(member);
         return Response.success();
+    }
+
+    public List<Member> memberList() {
+        return memberRepository.findAll();
     }
 }

@@ -4,6 +4,7 @@ import com.modim.spring.domain.book.model.Book;
 import com.modim.spring.domain.book.service.BookService;
 import com.modim.spring.domain.borrow.model.Borrow;
 import com.modim.spring.domain.borrow.service.BorrowService;
+import com.modim.spring.domain.member.model.Member;
 import com.modim.spring.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class manageController {
     private final MemberService memberService;
     private final BorrowService borrowService;
 
-    @GetMapping("/borrow/List")
+    @GetMapping("/borrow/list")
     public String borrowList(Model model){
         List<Borrow> borrowList = borrowService.borrowList();
         model.addAttribute("borrowList",borrowList);
@@ -41,10 +42,17 @@ public class manageController {
         return "manage/bookCU";      // 수정
     }
 
-    @GetMapping("/book/List")
+    @GetMapping("/book/list")
     public String bookList(Model model){
         List<Book> bookList = bookService.bookList();
         model.addAttribute("bookList",bookList);
         return "manage/bookList_mng";
+    }
+
+    @GetMapping("/member/list")
+    public String memberList(Model model){
+        List<Member> memberList = memberService.memberList();
+        model.addAttribute("memberList", memberList);
+        return "manage/memberList";
     }
 }
