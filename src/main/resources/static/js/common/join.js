@@ -81,8 +81,6 @@ $(document).ready(function(){
             email: $('#InputEmail').val(),
             gender: $("input[name='gender']:checked").val()
         }
-        console.log(postData);
-        debugger;
         $.ajax({
             type: 'POST',
             contentType : 'application/json; charset=utf-8;',
@@ -109,10 +107,17 @@ $(document).ready(function(){
                         location.href = "/";
                 }
                 else{
-                var data = response.data;
-                console.log(data);
-                let msg = response.message;
-                alert(msg);
+                    var data = response.data;
+                    var result='';
+                    data.forEach((arr,i) =>{
+                        result += arr;
+                        result +='\n';
+                    });
+
+                    alert(result);
+                    console.log(result);
+                    let msg = response.message;
+//                    alert(msg);
                 }
             },
             error : function(error){

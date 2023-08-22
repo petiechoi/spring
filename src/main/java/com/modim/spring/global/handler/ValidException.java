@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 @ControllerAdvice
 @RestController
@@ -23,6 +24,7 @@ public class ValidException {
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             arrayList.add(fieldError.getDefaultMessage());
         }
+        Collections.reverse(arrayList);
         return ResponseEntity.ok(Response.error(arrayList));
     }
 }
