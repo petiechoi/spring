@@ -1,0 +1,52 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragments/default">
+<th:block layout:fragment="content">
+  <div class="container card o-hidden border-0 shadow-lg my-5">
+    <div class="p-5 justify-content-center">
+      <div class="card-body">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>no</th>
+            <th>파일명</th>
+            <th>올린사람</th>
+            <th class="w-10p">파일</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>1</td>
+            <td>우리나라만세</td>
+            <td>관리자</td>
+            <td>
+              <a href="#"><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>우리나라만세</td>
+            <td>관리자</td>
+            <td>
+            <a href="#"><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>우리나라만세</td>
+            <td>관리자</td>
+            <td>
+              <a href="#"><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</th:block>
+<th:block layout:fragment="js">
+  <script src="https://use.fontawesome.com/releases/v6.4.2/js/all.js"></script>
+<!--  <script src="js/common/login.js"></script>-->
+</th:block>
+</html>

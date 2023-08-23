@@ -73,7 +73,9 @@ public class mainController {
         return "redirect:/";
     }
 
-
-
-
+    @GetMapping("/download")
+    public String download(Model model){
+        //model.addAttribute("")
+        return "pages/downloadList";
+    }
 }
