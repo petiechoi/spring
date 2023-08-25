@@ -12,6 +12,7 @@ import com.modim.spring.domain.member.service.MemberService;
 import com.modim.spring.domain.member.util.CurrentMemberUtil;
 import com.modim.spring.global.security.jwt.JwtFilter;
 import com.modim.spring.global.security.jwt.JwtTokenProvider;
+import com.modim.spring.global.storage.service.S3FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -32,6 +33,8 @@ public class mainController {
     private final BookService bookService;
     private final MemberService memberService;
 
+    private final S3FileService s3FileService;
+
     @Value("${cookie.name}")
     private String coockieName;
 
@@ -40,7 +43,7 @@ public class mainController {
 
     @GetMapping("/book/list")
     public String bookList(Model model, @RequestParam(value="page", defaultValue = "0")int page){
-        Page<Book> bookList = this.bookService.bookList(page);
+        Page<Book> bookList = bookService.bookList(page);
         model.addAttribute("bookList", bookList);
         return "pages/bookList";
     }
@@ -75,7 +78,8 @@ public class mainController {
 
     @GetMapping("/download")
     public String download(Model model){
-        //model.addAttribute("")
+        model.addAttribute("fileList",s3FileService.fileList());
+        ////model.addAttribute("")
         return "pages/downloadList";
     }
 }

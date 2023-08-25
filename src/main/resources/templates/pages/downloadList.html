@@ -10,33 +10,15 @@
           <tr>
             <th>no</th>
             <th>파일명</th>
-            <th>올린사람</th>
             <th class="w-10p">파일</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>1</td>
-            <td>우리나라만세</td>
-            <td>관리자</td>
+          <tr th:each="file, idx : ${fileList}">
+            <td th:text="${idx.index}"></td>
+            <td th:text="${file}"></td>
             <td>
-              <a href="#"><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>우리나라만세</td>
-            <td>관리자</td>
-            <td>
-            <a href="#"><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>우리나라만세</td>
-            <td>관리자</td>
-            <td>
-              <a href="#"><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
+              <a th:href='@{/file/download/{fileName}(fileName=${file})}'><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
             </td>
           </tr>
           </tbody>
