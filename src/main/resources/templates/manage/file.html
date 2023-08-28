@@ -1,0 +1,29 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="fragments/default">
+<th:block layout:fragment="content">
+    <div class="container-fluid pt-3 pb-3">
+        <section class="row flex-xl-nowrap">
+            <div id="nav-l" class="d-none d-xl-block col-xl-2 bd-toc"></div>
+            <main class="card container-fluid p-4 bd-content">
+                <h4 style="-webkit-text-stroke: thin;">파일 업로드</h4>
+                <div class="form-op">
+                    <div class="form-group">
+                        <label for="formFile" class="form-label mt-4">업로드할 파일을 선택해주세요.</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    <th:block>
+                        <button type="submit" id="file-create" class="btn btn-primary">Submit</button>
+                    </th:block>
+                </div>
+            </main>
+        </section>
+    </div>
+</th:block>
+<th:block layout:fragment="js">
+    <script src="/js/vendor/jquery/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.4.2/js/all.js"></script>
+    <script src="/js/common/file.js"></script>
+</th:block>
+</html>
+

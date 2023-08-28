@@ -5,7 +5,7 @@
 <div class="container-fluid pt-3 pb-3">
 <section class="row flex-xl-nowrap">
   <div id="nav-l" class="d-none d-xl-block col-xl-2 bd-toc"></div>
-  <main class="card col-12 col-md-9 col-xl-8 py-md-3 bd-content">
+  <main class="card container-fluid p-4 bd-content">
     <h4 th:text="${book}? '도서 수정':'도서 등록'" style="-webkit-text-stroke: thin;"></h4>
     <div class="form-op">
       <div class="form-group" th:if="${book}">

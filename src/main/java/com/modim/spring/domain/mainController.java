@@ -2,21 +2,12 @@ package com.modim.spring.domain;
 
 import com.modim.spring.domain.book.model.Book;
 import com.modim.spring.domain.book.service.BookService;
-import com.modim.spring.domain.borrow.model.Borrow;
-import com.modim.spring.domain.borrow.service.BorrowService;
 import com.modim.spring.domain.member.dto.MemberDto;
-import com.modim.spring.domain.member.model.Member;
-import com.modim.spring.domain.member.model.TokenResponseDto;
-import com.modim.spring.domain.member.service.AuthService;
 import com.modim.spring.domain.member.service.MemberService;
-import com.modim.spring.domain.member.util.CurrentMemberUtil;
-import com.modim.spring.global.security.jwt.JwtFilter;
-import com.modim.spring.global.security.jwt.JwtTokenProvider;
-import com.modim.spring.global.storage.service.S3FileService;
+import com.modim.spring.domain.file.service.S3FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller

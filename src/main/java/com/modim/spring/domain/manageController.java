@@ -55,4 +55,14 @@ public class manageController {
         model.addAttribute("memberList", memberList);
         return "manage/memberList";
     }
+
+    @GetMapping("/file/upload")
+    public String fileupload(Model model){
+        return "manage/file";
+    }
+
+    @GetMapping("/file/list")
+    public String filelist(Model model){
+        return "manage/filedel";
+    }
 }
