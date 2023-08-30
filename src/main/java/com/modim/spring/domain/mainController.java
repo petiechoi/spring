@@ -2,6 +2,7 @@ package com.modim.spring.domain;
 
 import com.modim.spring.domain.book.model.Book;
 import com.modim.spring.domain.book.service.BookService;
+import com.modim.spring.domain.file.service.FileService;
 import com.modim.spring.domain.member.dto.MemberDto;
 import com.modim.spring.domain.member.service.MemberService;
 import com.modim.spring.domain.file.service.S3FileService;
@@ -23,7 +24,7 @@ public class mainController {
     private final BookService bookService;
     private final MemberService memberService;
 
-    private final S3FileService s3FileService;
+    private final FileService fileService;
 
     @Value("${cookie.name}")
     private String coockieName;
@@ -68,7 +69,7 @@ public class mainController {
 
     @GetMapping("/download")
     public String download(Model model){
-        model.addAttribute("fileList",s3FileService.fileList());
+        model.addAttribute("fileList",fileService.list());
         ////model.addAttribute("")
         return "pages/downloadList";
     }

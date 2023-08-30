@@ -20,9 +20,9 @@
                             <tbody>
                             <tr th:each="file : ${fileList}" class="table-point">
                                 <input type="hidden" th:value="${file.id}">
-                                <td th:text="${file.fileName}"></td>
-                                <td th:text="${file.createdAt}"></td>
-                                <td th:text="${file.creator}"></td>
+                                <td th:text="${file?.fileId}"></td>
+                                <td th:text="${file?.createdAt}"></td>
+                                <td th:text="${file?.creator}"></td>
                             </tr>
                             </tbody>
                         </table>

@@ -2,10 +2,10 @@ package com.modim.spring.domain.file.model;
 
 import lombok.*;
 import org.hibernate.annotations.Comment;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Builder
@@ -19,7 +19,7 @@ public class File {
 
     @Comment("s3파일명")
     @Column(unique = true)
-    private String fildId;
+    private String fileId;
 
     @Comment("원본파일명")
     private String fileName;
@@ -28,6 +28,10 @@ public class File {
     private String creator;
 
     @Comment("생성일")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime createdAt;
+    private String createdAt;
+
+    @PrePersist
+    public void onPrePersist() {
+        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 }

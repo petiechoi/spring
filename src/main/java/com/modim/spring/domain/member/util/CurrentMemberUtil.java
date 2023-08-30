@@ -15,7 +15,7 @@ public class CurrentMemberUtil {
     private final MemberRepository memberRepository;
 
     // OUT: Member Loginid
-    public static String GetCurrentMemberId(){
+    public String GetCurrentMemberId(){
         String id="";
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if( principal instanceof UserDetails ){

@@ -10,15 +10,19 @@
           <tr>
             <th>no</th>
             <th>파일명</th>
-            <th class="w-10">파일</th>
+            <th>작성일</th>
+            <th>작성자</th>
+            <th class="w-10">첨부파일</th>
           </tr>
           </thead>
           <tbody>
           <tr th:each="file, idx : ${fileList}">
             <td th:text="${idx.index}"></td>
-            <td th:text="${file}"></td>
+            <td th:text="${file.fileName}"></td>
+            <td th:text="${file.createdAt}"></td>
+            <td th:text="${file.creator}"></td>
             <td>
-              <a th:href='@{/file/download/{fileName}(fileName=${file})}'><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
+              <a th:href='@{/file/download/{fileName}(fileName=${file.fileId})}'><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
             </td>
           </tr>
           </tbody>

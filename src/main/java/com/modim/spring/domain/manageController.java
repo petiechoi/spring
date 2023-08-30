@@ -4,6 +4,8 @@ import com.modim.spring.domain.book.model.Book;
 import com.modim.spring.domain.book.service.BookService;
 import com.modim.spring.domain.borrow.model.Borrow;
 import com.modim.spring.domain.borrow.service.BorrowService;
+import com.modim.spring.domain.file.model.File;
+import com.modim.spring.domain.file.service.FileService;
 import com.modim.spring.domain.member.model.Member;
 import com.modim.spring.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class manageController {
     private final BookService bookService;
     private final MemberService memberService;
     private final BorrowService borrowService;
+    private final FileService fileService;
 
     @GetMapping("/borrow/list")
     public String borrowList(Model model){
@@ -63,6 +66,8 @@ public class manageController {
 
     @GetMapping("/file/list")
     public String filelist(Model model){
+        List<File> fileList = fileService.list();
+        model.addAttribute("fileList", fileList);
         return "manage/filedel";
     }
 }

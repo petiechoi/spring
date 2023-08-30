@@ -8,13 +8,11 @@
             <main class="card container-fluid p-4 bd-content">
                 <h4 style="-webkit-text-stroke: thin;">파일 업로드</h4>
                 <div class="form-op">
-                    <div class="form-group">
+                    <form class="form-group" id="form">
                         <label for="formFile" class="form-label mt-4">업로드할 파일을 선택해주세요.</label>
-                        <input class="form-control" type="file" id="formFile">
-                    </div>
-                    <th:block>
-                        <button type="submit" id="file-create" class="btn btn-primary">Submit</button>
-                    </th:block>
+                        <input class="form-control" type="file" id="formFile" name="file">
+                    </form>
+                    <button type="submit" id="file-create" class="btn btn-primary">Submit</button>
                 </div>
             </main>
         </section>

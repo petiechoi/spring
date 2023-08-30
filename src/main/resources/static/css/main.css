@@ -16,6 +16,12 @@ button, input, optgroup, select, textarea {
     font-size: inherit;
     line-height: inherit;
 }
+a{
+    text-decoration: none !important;
+}
+.logo:hover a{
+    color: initial;
+}
 
 form.user .form-control-user {
     font-size: .8rem;
@@ -312,3 +318,4 @@ a{
     --bs-border-color: #eceeef;
     border: var(--bs-border-width) solid var(--bs-border-color);
 }
+
