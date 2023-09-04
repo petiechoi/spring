@@ -16,13 +16,14 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="file, idx : ${fileList}">
+          <tr th:each="file, idx : ${files}">
             <td th:text="${idx.index}"></td>
             <td th:text="${file.fileName}"></td>
             <td th:text="${file.createdAt}"></td>
             <td th:text="${file.creator}"></td>
             <td>
-              <a th:href='@{/file/download/{fileName}(fileName=${file.fileId})}'><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
+            <a th:data-url="@{/api/files/{fileId}(fileId=${file.fileId})}" th:data-file="${file.fileName}"
+                        onclick="function1(this.getAttribute('data-url'),this.getAttribute('data-file'));"><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
             </td>
           </tr>
           </tbody>
@@ -33,6 +34,6 @@
 </th:block>
 <th:block layout:fragment="js">
   <script src="https://use.fontawesome.com/releases/v6.4.2/js/all.js"></script>
-<!--  <script src="js/common/login.js"></script>-->
+  <script src="js/demo/downloads.js"></script>
 </th:block>
 </html>

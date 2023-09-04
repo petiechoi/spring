@@ -14,46 +14,49 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-@RequestMapping("/api")
+
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class BorrowController {
-
     private final BorrowService borrowService;
     private final CurrentMemberUtil currentMemberUtil;
-    // 도서 대여 신청
-    @PostMapping("/borrow")
-    public ResponseEntity<Response> borrow(@RequestBody HashMap<String, String> map)
+
+    // 도서 대여 목록
+    @GetMapping("/borrows")
+    public List<Borrow> list()
+    {
+        return borrowService.list();
+    }
+
+
+    // 대여 신청
+    @PostMapping("/borrows")
+    public ResponseEntity<Response> create(@RequestBody HashMap<String, String> map)
     {
         Optional<Member> member = currentMemberUtil.getCurrentMember();
         if(member.isEmpty())
             return new ResponseEntity<>(Response.error("유저를 찾을 수 없습니다."), HttpStatus.OK);
 
-        borrowService.borrowBook(Long.parseLong(map.get("id")));
+        borrowService.create(Long.parseLong(map.get("id")));
         return new ResponseEntity<>(Response.success(), HttpStatus.OK);
     }
 
-    // 도서 대여 승인
-    @PostMapping("/borrow/apply/{id}")
-    public ResponseEntity borrowApply(@PathVariable(value="id")Long id)
+    // 대여 승인
+    @PostMapping("/borrows/{id}")
+    public ResponseEntity apply(@PathVariable(value="id")Long id)
     {
-        borrowService.borrowApply(id);
+        borrowService.apply(id);
         return new ResponseEntity<>(Response.success(),HttpStatus.OK);
     }
 
-    // 도서 승인 삭제
-    @DeleteMapping("/borrow/{id}")
-    public ResponseEntity borrowDelete(@PathVariable(value="id")Long id)
+    // 대여 삭제(반납)
+    @DeleteMapping("/borrows/{id}")
+    public ResponseEntity delete(@PathVariable(value="id")Long id)
     {
-        borrowService.borrowDelete(id);
+        borrowService.delete(id);
         return new ResponseEntity<>(Response.success(),HttpStatus.OK);
     }
 
-    // 도서 대여 목록
-    @GetMapping("/borrow")
-    public List<Borrow> borrowList()
-    {
-        return borrowService.borrowList();
-    }
 
 }

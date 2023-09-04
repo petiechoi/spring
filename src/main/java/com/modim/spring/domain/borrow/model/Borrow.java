@@ -45,7 +45,7 @@ public class Borrow {
         this.status = Status.APPLY;
     }
 
-    public void Apply() {
+    public void apply() {
         if (this.status.equals(Status.APPLY)) {
             this.status = Status.PROGRESS;
 //            this.borrowedAt = LocalDateTime.now();

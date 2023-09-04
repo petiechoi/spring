@@ -31,7 +31,7 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            <tr th:each="borrow : ${borrowList}" class="table-point">
+                            <tr th:each="borrow : ${borrows}" class="table-point">
                                 <input type="hidden" th:value="${borrow.id}">
                                 <td th:text="${borrow.book.title}"></td>
                                 <td th:text="${borrow.book.author}"></td>
@@ -58,6 +58,6 @@
     <script src="/js/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/js/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.4.2/js/all.js"></script>
-    <script src="/js/common/borrowList.js"></script>
+    <script src="/js/demo/manage/borrows.js"></script>
 </th:block>
 </html>

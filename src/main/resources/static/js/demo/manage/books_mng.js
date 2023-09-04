@@ -10,7 +10,7 @@ function deleteBook(id){
     if (confirm(result)){
         $.ajax({
             type: 'DELETE',
-        	url : '/api/book/'+ id,
+        	url : '/api/books/'+ id,
         	success: function(response){
         	    if(response.success)
         	        location.replace(location.href);

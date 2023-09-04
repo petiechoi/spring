@@ -12,5 +12,5 @@ public interface FileService{
     String delete(Long id);
 
     // 파일 생성
-    void create(MultipartFile multipartFile, String storeFileName);
+    boolean create(MultipartFile multipartFile, String storeFileName);
 }

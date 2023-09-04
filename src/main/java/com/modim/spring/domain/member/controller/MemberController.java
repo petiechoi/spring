@@ -40,11 +40,6 @@ public class MemberController {
         return ResponseEntity.ok(tokenResponseDto);
     }
 
-    @PostMapping("/logout")
-    public void logout(HttpServletResponse response){
-        response.addCookie(delCookie());
-    }
-
     //    쿠키를 가져올땐 HttpServletRequest 에서 가져오고,
     //    쿠키를 설정할땐 HttpServletResponse로 설정한다.
     public Cookie setCookie(String coockieValue)
@@ -54,12 +49,6 @@ public class MemberController {
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
-        return cookie;
-    }
-
-    public Cookie delCookie(){
-        Cookie cookie = new Cookie(coockieName, null);
-        cookie.setMaxAge(0);
         return cookie;
     }
 

@@ -14,19 +14,19 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class FileController {
 
     final private FileServiceImpl fileService;
     final private S3FileService s3FileService;
 
-    @PostMapping("/file")
-//    public ResponseEntity<Response> create(@RequestParam("file")MultipartFile multipartFile) throws IOException {
+    @PostMapping("/files")
     public ResponseEntity<Response> create(@RequestParam("file")MultipartFile multipartFile) throws IOException {
-        Response response = new Response();
         if( !multipartFile.isEmpty()) {
             String storeFileName = createStoreFileName(multipartFile.getOriginalFilename());
-            fileService.create(multipartFile, storeFileName);
-            return new ResponseEntity<>(s3FileService.create(multipartFile, storeFileName), HttpStatus.OK);
+            if( fileService.create(multipartFile, storeFileName) )
+                return new ResponseEntity<>(s3FileService.create(multipartFile, storeFileName), HttpStatus.OK);
+            else return new ResponseEntity<>(Response.error("재 로그인이 필요합니다."),HttpStatus.OK);
         }
         return new ResponseEntity<>(Response.error("파일이 없습니다."),HttpStatus.OK);
     }
@@ -40,9 +40,14 @@ public class FileController {
         return originFileName.substring(pos + 1);
     }
 
-    @DeleteMapping("/file")
-    public ResponseEntity<Response> delete(@RequestParam Long id){
+    @DeleteMapping("/files/{id}")
+    public ResponseEntity<Response> delete(@PathVariable(value="id")Long id){
         String s3fileName = fileService.delete(id);
         return new ResponseEntity<>(s3FileService.delete(s3fileName), HttpStatus.OK);
+    }
+
+    @GetMapping("/files/{fileId}/{fileName}")
+    public ResponseEntity<byte[]> download(@PathVariable String fileId, @PathVariable String fileName) throws IOException {
+        return s3FileService.download(fileId, fileName);
     }
 }

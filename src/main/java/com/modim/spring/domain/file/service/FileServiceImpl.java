@@ -35,11 +35,11 @@ public class FileServiceImpl implements FileService {
 
     @Override
     @Transactional
-    public void create(MultipartFile multipartFile, String storeFileName) {
+    public boolean create(MultipartFile multipartFile, String storeFileName) {
         String creator = currentMemberUtil.GetCurrentMemberId();
         if (creator.length() == 0) {
             // 오류 핸들러
-            return;
+            return false;
         }
         FileDto fileDto = FileDto.builder()
                 .fileName(multipartFile.getOriginalFilename())
@@ -47,5 +47,6 @@ public class FileServiceImpl implements FileService {
                 .build();
         File file = fileDto.toEntity(storeFileName);
         fileRepository.save(file);
+        return true;
     }
 }

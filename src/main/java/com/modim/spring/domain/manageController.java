@@ -26,48 +26,48 @@ public class manageController {
     private final BorrowService borrowService;
     private final FileService fileService;
 
-    @GetMapping("/borrow/list")
-    public String borrowList(Model model){
-        List<Borrow> borrowList = borrowService.borrowList();
-        model.addAttribute("borrowList",borrowList);
-        return "manage/borrowList";
+    @GetMapping("/borrows")
+    public String borrows(Model model){
+        List<Borrow> borrows = borrowService.list();
+        model.addAttribute("borrows",borrows);
+        return "manage/borrows";
     }
 
-    @GetMapping("/book/create")
-    public String bookCreate(Model model){
-        return "manage/bookCU";      // 생성
+    @GetMapping("/books/form")
+    public String bookForm(Model model){
+        return "manage/book";      // 생성
     }
 
-    @GetMapping("/book/update/{id}")
+    @GetMapping("/books/{id}")
     public String bookUpdate(Model model, @PathVariable(value="id") Long id){
-        Book book = bookService.bookView(id);
+        Book book = bookService.detail(id);
         model.addAttribute("book",book);
-        return "manage/bookCU";      // 수정
+        return "manage/book";      // 수정
     }
 
-    @GetMapping("/book/list")
-    public String bookList(Model model){
-        List<Book> bookList = bookService.bookList();
-        model.addAttribute("bookList",bookList);
-        return "manage/bookList_mng";
+    @GetMapping("/books")
+    public String books_mng(Model model){
+        List<Book> books = bookService.list();
+        model.addAttribute("books",books);
+        return "manage/books_mng";
     }
 
-    @GetMapping("/member/list")
-    public String memberList(Model model){
-        List<Member> memberList = memberService.memberList();
-        model.addAttribute("memberList", memberList);
-        return "manage/memberList";
+    @GetMapping("/members")
+    public String members(Model model){
+        List<Member> members = memberService.memberList();
+        model.addAttribute("members", members);
+        return "manage/members";
     }
 
-    @GetMapping("/file/upload")
-    public String fileupload(Model model){
+    @GetMapping("/files/upload")
+    public String fileUpload(Model model){
         return "manage/file";
     }
 
-    @GetMapping("/file/list")
-    public String filelist(Model model){
-        List<File> fileList = fileService.list();
-        model.addAttribute("fileList", fileList);
-        return "manage/filedel";
+    @GetMapping("/files")
+    public String files(Model model){
+        List<File> files = fileService.list();
+        model.addAttribute("files", files);
+        return "manage/files";
     }
 }

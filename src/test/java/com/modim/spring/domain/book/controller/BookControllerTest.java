@@ -75,7 +75,7 @@ public class BookControllerTest {
                 .publisher(publisher)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/book";
+        String url = "http://localhost:" + port + "/api/books";
 
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
 

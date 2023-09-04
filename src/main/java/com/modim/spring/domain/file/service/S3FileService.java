@@ -4,18 +4,21 @@ import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
+import com.amazonaws.util.IOUtils;
 import com.modim.spring.global.response.dto.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -26,16 +29,6 @@ public class S3FileService {
     private String bucket;
 
     private final AmazonS3 amazonS3;
-
-
-    private File convert(MultipartFile multipartFile) throws IOException{
-        File convFile = new File(multipartFile.getOriginalFilename());
-        convFile.createNewFile();
-        FileOutputStream fileOutputStream = new FileOutputStream(convFile);
-        fileOutputStream.write(multipartFile.getBytes());;
-        fileOutputStream.close();
-        return convFile;
-    }
 
     public Response create(MultipartFile multipartFile, String storeFileName) throws IOException {
         try{
@@ -49,6 +42,14 @@ public class S3FileService {
         }
         return Response.success();
     }
+    private File convert(MultipartFile multipartFile) throws IOException{
+        File convFile = new File(multipartFile.getOriginalFilename());
+        convFile.createNewFile();
+        FileOutputStream fileOutputStream = new FileOutputStream(convFile);
+        fileOutputStream.write(multipartFile.getBytes());;
+        fileOutputStream.close();
+        return convFile;
+    }
 
     public Response delete(String s3fileName){
         try{
@@ -59,27 +60,34 @@ public class S3FileService {
         return Response.success();
     }
 
-
-    public Response getObject(String fileName) {
+    public ResponseEntity<byte[]> download(String fileId, String fileName) throws IOException {
         try{
-            S3Object o =amazonS3.getObject(new GetObjectRequest(bucket, fileName));
-        }catch (AmazonServiceException ase){
-            return Response.error(ase.getMessage());
+            S3Object o =amazonS3.getObject(new GetObjectRequest(bucket, fileId));
+            S3ObjectInputStream objectInputStream = ((S3Object) o).getObjectContent();
+
+            byte[] bytes = IOUtils.toByteArray(objectInputStream);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            httpHeaders.setContentLength(bytes.length);
+            httpHeaders.setContentDispositionFormData("attachment", fileName);
+            return new ResponseEntity<>(bytes, httpHeaders, HttpStatus.OK);
+
+        } catch (AmazonServiceException ase){
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
-        return Response.success();
     }
 
-    public List<String> fileList(){
-        List<String> fileList = new ArrayList<>();
-        ObjectListing objects = amazonS3.listObjects(bucket);
-        do {
-            //1000개 단위로 읽음
-            for (S3ObjectSummary objectSummary : objects.getObjectSummaries()) {
-                fileList.add(objectSummary.getKey());
-            }
-            objects = amazonS3.listNextBatchOfObjects(objects);
-        } while (objects.isTruncated());
-        return fileList;
-    }
-
+    // 미사용
+//    public List<String> list(){
+//        List<String> fileList = new ArrayList<>();
+//        ObjectListing objects = amazonS3.listObjects(bucket);
+//        do {
+//            //1000개 단위로 읽음
+//            for (S3ObjectSummary objectSummary : objects.getObjectSummaries()) {
+//                fileList.add(objectSummary.getKey());
+//            }
+//            objects = amazonS3.listNextBatchOfObjects(objects);
+//        } while (objects.isTruncated());
+//        return fileList;
+//    }
 }

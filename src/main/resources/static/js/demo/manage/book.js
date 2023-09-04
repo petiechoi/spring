@@ -3,6 +3,7 @@
 		$("#nav-l").load("/js/menu/sideMenu.html");
 	});
 
+    // 도서등록
 	$('#book-create').click(function() {
 	    var Title = $('#title').val();
 	    var Author = $('#author').val();
@@ -26,7 +27,7 @@
 	            contentType : 'application/json; charset=utf-8;',
 	            data: JSON.stringify(postData),
 	            dataType: 'json',
-	            url : '/api/book',
+	            url : '/api/books',
 	            success: function(response){
 	                if(response.success)
 	                    location.replace(location.href);
@@ -38,12 +39,11 @@
 	     }
 	});
 
+    // 도서 수정
 		$('#book-update').click(function() {
     	    var Title = $('#title').val();
     	    var Author = $('#author').val();
     	    var Publisher = $('#publisher').val();
-
-            console.log($('#bid').val());
 
     	    let result = '책제목:'+ Title + '\n' +
     	     '저자:' + Author + '\n' + '출판사:' + Publisher + '\n수정하시겠습니까?';
@@ -63,7 +63,7 @@
     	            contentType : 'application/json; charset=utf-8;',
     	            data: JSON.stringify(postData),
     	            dataType: 'json',
-    	            url : '/api/book/'+ $('#bid').val(),
+    	            url : '/api/books/'+ $('#bid').val(),
     	            success: function(response){
     	                if(response.success)
     	                    history.back();

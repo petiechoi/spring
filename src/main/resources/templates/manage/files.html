@@ -9,23 +9,20 @@
             <div class="card shadow-table mb-4 container-fluid">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table id="table" class="table table-hover table-bordered" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>UID</th>
-                                <th>ID</th>
-                                <th>이름</th>
-                                <th>가입일</th>
-                                <th>이메일</th>
+                                <th>파일명</th>
+                                <th>생성일</th>
+                                <th class="w-10">작성자</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="member : ${memberList}" class="table-point">
-                                <td th:text="${member.id}"></td>
-                                <td th:text="${member.loginId}"></td>
-                                <td th:text="${member.name}"></td>
-                                <td th:text="${#temporals.format(member.register_date, 'yyyy-MM-dd')}"></td>
-                                <td th:text="${member.email}"></td>
+                            <tr th:each="file : ${files}" clas="table-point">
+                                <input id="fid" type="hidden" th:value="${file.id}">
+                                <td th:text="${file?.fileName}" ></td>
+                                <td th:text="${file?.createdAt}" ></td>
+                                <td th:text="${file?.creator}" ></td>
                             </tr>
                             </tbody>
                         </table>
@@ -42,6 +39,11 @@
     <script src="/js/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/js/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v6.4.2/js/all.js"></script>
-    <script src="/js/common/memberList.js"></script>
+    <script src="/js/demo/manage/files.js"></script>
+<!--    <script>-->
+<!--        window.addEventListener('load', function(){-->
+<!--            $("#nav-l").load("/js/menu/sideMenu.html");-->
+<!--        })-->
+<!--    </script>-->
 </th:block>
 </html>

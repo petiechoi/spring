@@ -24,6 +24,7 @@ public class Member {
     private Long id;
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<Borrow> borrows = new ArrayList<>();
 
     @Column(unique = true)
@@ -51,6 +52,7 @@ public class Member {
     private Gender gender;
 
     @Comment("탈퇴여부")
+    @Builder.Default
     private boolean deleteYN = false;
 
     public void setBorrows(Borrow borrow){

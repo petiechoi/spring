@@ -26,7 +26,7 @@ public class BorrowService {
 
     // 책 대여
     @Transactional
-    public void borrowBook(Long id){
+    public void create(Long id){
         Member member = currentMemberUtil.getCurrentMember().get();
         Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("책을 찾을 수 없습니다."));
         if(book.getBorrow() == null){
@@ -44,21 +44,21 @@ public class BorrowService {
     }
 
     @Transactional
-    public Long borrowApply(Long id){
+    public Long apply(Long id){
         Borrow borrow = borrowRepository.findById(id).get();
-        borrow.Apply(); // must have transactional annotation
+        borrow.apply(); // must have transactional annotation
         return borrow.getId();
     }
 
     @Transactional
-    public void borrowDelete(Long id){
+    public void delete(Long id){
         Borrow borrow = borrowRepository.findById(id).orElseThrow();
         borrow.getMember().delBorrow(borrow);
         borrow.getBook().setBorrow(null);
         borrowRepository.deleteById(id);
     }
 
-    public List<Borrow> borrowList(){
+    public List<Borrow> list(){
         return borrowRepository.findAll();
     }
 }

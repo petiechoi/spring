@@ -12,7 +12,7 @@ $('.table-point').click(function() {
                 contentType :'application/json; charset=utf-8;',
                 data:JSON.stringify(postData),
                 dataType:'json',
-                url :'/api/borrow',
+                url :'/api/borrows',
                 success :function(response) {
                 if (!response.success) {
                     alert(response.message);

@@ -7,17 +7,20 @@
 	    var form = $('#form')[0];
 	    var formData = new FormData(form);
 	    $.ajax({
-	        url: '/file',
+	        url: '/api/files',
 	        enctype: 'multipart/form-data',
 	        contentType: false,
             processData: false,
 	        data : formData,
 	        type : 'POST',
-	        success: function(result){
-	            alert("성공");
+	        success: function(response){
+                if(response.success)
+                    location.replace(location.href);
+                else
+                    alert(response.message);
 	        },
-	        error : function(res){
-	            alert("실패");
+	        error : function(error){
+	            alert("오류");
 	        }
 	    });
 	});
