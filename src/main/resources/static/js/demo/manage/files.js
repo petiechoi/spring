@@ -3,7 +3,7 @@
 		$("#nav-l").load("/js/menu/sideMenu.html");
 	});
 
-	$('#table tr').click(function() {
+	$('#table tbody tr').click(function() {
 	    var tr = $(this);
         var td = tr.children();
 	    var fid = td.eq(0).val();

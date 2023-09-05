@@ -21,7 +21,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${books}" class="table-point">
+        <tr th:each="book : ${books}" class="table-hover table-point">
             <input type="hidden" th:value="${book.id}">
             <td id="title" name="title" th:text="${book.title}"></td>
             <td id="author" th:text="${book.author}"></td>

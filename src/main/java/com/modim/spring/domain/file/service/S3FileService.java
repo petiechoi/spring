@@ -60,7 +60,7 @@ public class S3FileService {
         return Response.success();
     }
 
-    public ResponseEntity<byte[]> download(String fileId, String fileName) throws IOException {
+    public ResponseEntity<byte[]> download(String fileId) throws IOException {
         try{
             S3Object o =amazonS3.getObject(new GetObjectRequest(bucket, fileId));
             S3ObjectInputStream objectInputStream = ((S3Object) o).getObjectContent();
@@ -69,7 +69,7 @@ public class S3FileService {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             httpHeaders.setContentLength(bytes.length);
-            httpHeaders.setContentDispositionFormData("attachment", fileName);
+//            httpHeaders.setContentDispositionFormData("attachment", fileName);
             return new ResponseEntity<>(bytes, httpHeaders, HttpStatus.OK);
 
         } catch (AmazonServiceException ase){

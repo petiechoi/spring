@@ -22,8 +22,7 @@
             <td th:text="${file.createdAt}"></td>
             <td th:text="${file.creator}"></td>
             <td>
-            <a th:data-url="@{/api/files/{fileId}(fileId=${file.fileId})}" th:data-file="${file.fileName}"
-                        onclick="function1(this.getAttribute('data-url'),this.getAttribute('data-file'));"><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
+              <a th:href='@{/api/files/{fileId}(fileId=${file.fileId})}' th:download="${file.fileName}"><i class="fa-solid fa-file-export" style="color: #2076c5;"></i></a>
             </td>
           </tr>
           </tbody>

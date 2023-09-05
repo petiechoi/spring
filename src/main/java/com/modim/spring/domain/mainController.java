@@ -4,6 +4,7 @@ import com.modim.spring.domain.book.model.Book;
 import com.modim.spring.domain.book.service.BookService;
 import com.modim.spring.domain.file.service.FileService;
 import com.modim.spring.domain.member.service.MemberService;
+import com.modim.spring.domain.member.util.CurrentMemberUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -17,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor
 @Controller
 public class mainController {
-
     private final BookService bookService;
     private final FileService fileService;
+    private final CurrentMemberUtil currentMemberUtil;
 
     @Value("${cookie.name}")
     private String coockieName;
@@ -61,8 +62,8 @@ public class mainController {
 
     // 회원가입
     @GetMapping("/join")
-    public String join(Model model, @CookieValue(name="modim", required = false)String modim){
-        if(modim == null)
+    public String join(Model model){
+        if(currentMemberUtil.getCurrentMember().isEmpty())
             return "pages/join";
         return "redirect:/";
     }

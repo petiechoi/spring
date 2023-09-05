@@ -6,7 +6,7 @@
     color : #17a2b8;
 }
 
-.table-point{
+.table-point tbody tr{
     cursor : pointer;
 }
 

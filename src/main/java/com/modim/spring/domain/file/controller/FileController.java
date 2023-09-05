@@ -46,8 +46,8 @@ public class FileController {
         return new ResponseEntity<>(s3FileService.delete(s3fileName), HttpStatus.OK);
     }
 
-    @GetMapping("/files/{fileId}/{fileName}")
-    public ResponseEntity<byte[]> download(@PathVariable String fileId, @PathVariable String fileName) throws IOException {
-        return s3FileService.download(fileId, fileName);
+    @GetMapping("/files/{fileId}")
+    public ResponseEntity<byte[]> download(@PathVariable String fileId) throws IOException {
+        return s3FileService.download(fileId);
     }
 }
