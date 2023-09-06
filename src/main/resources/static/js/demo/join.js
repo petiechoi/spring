@@ -5,6 +5,25 @@ $(document).ready(function(){
         });
     });
 
+    $('#join').on('click', function() {
+        join();
+    });
+
+    $("#InputPassword, #RepeatPassword").on("change", function() {
+    	var InputPassword = $('#InputPassword').val(); /* 패스워드와 패스워드 확인 부분 가져오기 */
+    	var RepeatPassword = $('#RepeatPassword').val();
+    	if( !InputPassword.length || !RepeatPassword.length)
+    	    return;
+    	pw_validate();
+    });
+});
+
+    window.addEventListener( 'keyup', e => {
+        if(e.keyCode === 13){
+            join();
+        }
+    });
+
     function validate (input) {
         var ret = true;
 
@@ -49,15 +68,7 @@ $(document).ready(function(){
     }
 
 
-    $("#InputPassword, #RepeatPassword").on("change", function() {
-    	var InputPassword = $('#InputPassword').val(); /* 패스워드와 패스워드 확인 부분 가져오기 */
-    	var RepeatPassword = $('#RepeatPassword').val();
-    	if( !InputPassword.length || !RepeatPassword.length)
-    	    return;
-    	pw_validate();
-    });
-
-    $('#join').on('click', function() {
+    function join() {
         var input = $('.form-control');
         var check = true;
 
@@ -125,5 +136,4 @@ $(document).ready(function(){
                 // 오류
             }
         });
-    });
-});
+    }

@@ -32,8 +32,12 @@ public class S3FileService {
 
     public Response create(MultipartFile multipartFile, String storeFileName) throws IOException {
         try{
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, storeFileName, convert(multipartFile));
-            putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);  // URL 접근시 권한 읽을수 있도록 설정.
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentLength(multipartFile.getSize());
+            objectMetadata.setContentType(multipartFile.getContentType());
+
+            PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, storeFileName, multipartFile.getInputStream(), objectMetadata);
+            putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
             amazonS3.putObject(putObjectRequest);
         } catch (AmazonServiceException ase){
             return Response.error(ase.getMessage());
@@ -41,14 +45,6 @@ public class S3FileService {
             return Response.error(ace.getMessage());
         }
         return Response.success();
-    }
-    private File convert(MultipartFile multipartFile) throws IOException{
-        File convFile = new File(multipartFile.getOriginalFilename());
-        convFile.createNewFile();
-        FileOutputStream fileOutputStream = new FileOutputStream(convFile);
-        fileOutputStream.write(multipartFile.getBytes());;
-        fileOutputStream.close();
-        return convFile;
     }
 
     public Response delete(String s3fileName){
